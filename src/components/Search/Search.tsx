@@ -1,15 +1,8 @@
-import { Component } from 'react';
+import React from 'react';
 import styles from './Search.module.css';
+import { SearchProps, SearchState } from '../../interfaces/interfaces';
 
-interface SearchProps {
-  onSearch: (term: string) => void;
-}
-
-interface SearchState {
-  searchTerm: string;
-}
-
-class Search extends Component<SearchProps, SearchState> {
+class Search extends React.Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
     super(props);
     const savedSearchTerm = localStorage.getItem('searchTerm') || '';
