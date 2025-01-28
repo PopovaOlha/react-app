@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './App.css';
+import './App.module.css';
 import viteLogo from './assets/react.svg';
 
 function App() {
