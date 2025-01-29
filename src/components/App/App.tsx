@@ -1,15 +1,17 @@
 import { Component } from 'react';
-import './App.module.css';
+import styles from './App.module.css';
 import Search from '../Search/Search';
 
 class App extends Component {
   render() {
     return (
-      <Search
-        onSearch={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
+      <div className={styles.container}>
+        <Search
+          onSearch={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+        />
+      </div>
     );
   }
 }

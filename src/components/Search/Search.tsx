@@ -1,8 +1,8 @@
-import React from 'react';
+import { Component } from 'react';
 import styles from './Search.module.css';
 import { SearchProps, SearchState } from '../../interfaces/interfaces';
 
-class Search extends React.Component<SearchProps, SearchState> {
+class Search extends Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
     super(props);
     const savedSearchTerm = localStorage.getItem('searchTerm') || '';
@@ -14,8 +14,7 @@ class Search extends React.Component<SearchProps, SearchState> {
   };
 
   handleSearch = () => {
-    const { searchTerm } = this.state;
-    const trimmedTerm = searchTerm.trim();
+    const trimmedTerm = this.state.searchTerm.trim();
     localStorage.setItem('searchTerm', trimmedTerm);
     this.props.onSearch(trimmedTerm);
   };
@@ -24,13 +23,13 @@ class Search extends React.Component<SearchProps, SearchState> {
     return (
       <div className={styles.searchContainer}>
         <input
+          className={styles.input}
           type="text"
           value={this.state.searchTerm}
           onChange={this.handleInputChange}
-          placeholder="Search..."
-          className={styles.searchInput}
+          placeholder="Search for a character..."
         />
-        <button onClick={this.handleSearch} className={styles.searchButton}>
+        <button className={styles.button} onClick={this.handleSearch}>
           Search
         </button>
       </div>
