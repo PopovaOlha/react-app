@@ -22,7 +22,7 @@
 .loaderContainer {
   position: absolute;
   top: 0;
-  left:0;
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -44,7 +44,9 @@
   border: 6px solid rgba(255, 215, 0, 0.3);
   border-top-color: #ffd700;
   border-radius: 50%;
-  animation: spin 1s linear infinite, glow 1.5s ease-in-out infinite;
+  animation:
+    spin 1s linear infinite,
+    glow 1.5s ease-in-out infinite;
 }
 
 .text {
