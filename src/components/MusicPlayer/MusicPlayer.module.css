@@ -1,9 +1,10 @@
 .musicPlayer {
   position: fixed;
-  bottom: 20px;
-  right: 10px;
+  bottom: 10px;
+  right: 5px;
   background: rgba(0, 0, 0, 0.9);
   padding: 10px 20px;
+	border: 2px solid rgb(255, 162, 0);
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -12,15 +13,18 @@
   color: rgb(255, 162, 0);
   font-family: 'Star Jedi', sans-serif;
 }
+.musicPlayer:hover {
+	border: 2px solid #00bfff;
+}
 
 .playPauseButton {
   background-color: transparent;
   border: 2px solid #ffd700;
 	border-radius: 5px;
   color: rgb(255, 162, 0);
-  padding: 10px;
+  padding: 5px 10px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 2px;
   display: flex;
@@ -29,10 +33,16 @@
 }
 
 .playPauseButton:hover {
-  background-color: #ffd700;
+  background-color: #00bfff;
+	transition: 0.3s;
   color: #000;
 }
 
 .icon {
   font-size: 20px;
+}
+.volumeSlider {
+  width: 80px;
+  margin-left: 10px;
+  cursor: pointer;
 }
