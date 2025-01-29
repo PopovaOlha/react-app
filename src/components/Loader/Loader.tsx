@@ -5,10 +5,10 @@ class Loader extends Component {
   render() {
     return (
       <div className={styles.loaderContainer}>
-        <div className={styles.loader}>
+        <di className={styles.loader}>
           <div className={styles.spinner}></div>
           <p className={styles.text}>Loading...</p>
-        </div>
+        </di>
       </div>
     );
   }
