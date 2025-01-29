@@ -7,6 +7,13 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background: url('/stars-bg.jpg') repeat;
+  background: url('./assets/evvjozguyaa1rqi.avif') repeat;
   background-size: cover;
+}
+
+@media (max-width: 768px) {
+  body {
+    background: url('./assets/darth-vader-poster-wallpaper.jpg') repeat;
+    background-size: cover;
+  }
 }

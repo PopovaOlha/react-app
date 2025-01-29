@@ -6,22 +6,26 @@
 }
 
 .input {
-  width: 80%;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #0ff;
+  border: 2px solid rgb(255, 162, 0);
   background: rgba(0, 0, 0, 0.8);
-  color: #0ff;
+  color: rgb(255, 162, 0);
   outline: none;
   border-radius: 5px;
+}
+
+input:hover {
+  border: 2px solid #00bfff;
 }
 
 .button {
   padding: 10px 15px;
   font-size: 16px;
-  background: #0ff;
+  background: rgb(255, 162, 0);
   color: #000;
-  border: none;
+  border: 1px solid grey;
   cursor: pointer;
   border-radius: 5px;
   transition: 0.3s;
