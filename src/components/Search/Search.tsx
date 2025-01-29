@@ -10,6 +10,7 @@ class Search extends Component<SearchProps, SearchState> {
   }
 
   handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     this.setState({ searchTerm: e.target.value });
   };
 

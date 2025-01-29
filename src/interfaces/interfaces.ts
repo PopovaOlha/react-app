@@ -21,3 +21,9 @@ export interface CardListProps {
   loading: boolean;
   error: string | null;
 }
+
+export interface APICharacter {
+  name: string;
+  birth_year: string;
+  url: string;
+}
