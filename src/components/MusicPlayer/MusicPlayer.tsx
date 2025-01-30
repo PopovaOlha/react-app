@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import styles from './MusicPlayer.module.css';
-
-interface MusicPlayerState {
-  isPlaying: boolean;
-  volume: number;
-}
+import { MusicPlayerState } from '../../interfaces/interfaces';
 
 class MusicPlayer extends Component<object, MusicPlayerState> {
   private audioRef = React.createRef<HTMLAudioElement>();
@@ -17,7 +13,7 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
     };
   }
 
-  handlePlayPause = () => {
+  handlePlayPause = (): void => {
     const audio = this.audioRef.current;
     if (audio) {
       if (audio.paused) {
@@ -30,7 +26,7 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
     }
   };
 
-  handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const newVolume = Number(event.target.value);
     this.setState({ volume: newVolume });
 
@@ -39,7 +35,7 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
     }
   };
 
-  render() {
+  render(): JSX.Element {
     return (
       <div className={styles.musicPlayer}>
         <button

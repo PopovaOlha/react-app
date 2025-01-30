@@ -9,18 +9,18 @@ class Search extends Component<SearchProps, SearchState> {
     this.state = { searchTerm: savedSearchTerm };
   }
 
-  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
     this.setState({ searchTerm: e.target.value });
   };
 
-  handleSearch = () => {
+  handleSearch = (): void => {
     const trimmedTerm = this.state.searchTerm.trim();
     localStorage.setItem('searchTerm', trimmedTerm);
     this.props.onSearch(trimmedTerm);
   };
 
-  render() {
+  render(): JSX.Element {
     return (
       <div className={styles.searchContainer}>
         <input

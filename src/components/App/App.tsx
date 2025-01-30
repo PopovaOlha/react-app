@@ -4,7 +4,7 @@ import Search from '../Search/Search';
 import Footer from '../Footer/Footer';
 
 class App extends Component {
-  render() {
+  render(): JSX.Element {
     return (
       <>
         <div className={styles.container}>
