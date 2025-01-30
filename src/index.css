@@ -15,5 +15,6 @@ body {
   body {
     background: url('./assets/darth-vader-poster-wallpaper.jpg') repeat;
     background-size: cover;
+    overflow-x: hidden;
   }
 }

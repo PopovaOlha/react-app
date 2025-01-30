@@ -1,0 +1,32 @@
+.cardList {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping of items onto new lines */
+  gap: 20px; /* Adjust space between cards */
+  padding: 20px;
+  justify-content: center;
+}
+
+.cardList .card {
+  flex: 1 1 calc(33.33% - 20px); /* 3 cards per row, minus gap space */
+  margin-bottom: 20px; /* Space below each card */
+}
+
+@media (max-width: 1024px) {
+  .cardList .card {
+    flex: 1 1 calc(33.33% - 20px); /* 3 cards on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .cardList .card {
+    flex: 1 1 calc(50% - 20px); /* 2 cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .cardList .card {
+    flex: 1 1 100%; /* 1 card per row on very small screens */
+  }
+}
+
+

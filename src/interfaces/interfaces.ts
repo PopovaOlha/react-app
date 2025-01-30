@@ -8,8 +8,10 @@ export interface SearchState {
 
 export interface Character {
   id: string;
+  image: string;
   name: string;
   description: string;
+  character: string;
 }
 
 export interface CardProps {
@@ -30,4 +32,5 @@ export interface APICharacter {
 export interface MusicPlayerState {
   isPlaying: boolean;
   volume: number;
+  currentTrackIndex: number;
 }
