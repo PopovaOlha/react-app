@@ -22,7 +22,7 @@ class Search extends Component<SearchProps, SearchState> {
 
   render(): JSX.Element {
     return (
-      <div className={styles.searchContainer}>
+      <di className={styles.searchContainer}>
         <input
           className={styles.input}
           type="text"
@@ -33,7 +33,7 @@ class Search extends Component<SearchProps, SearchState> {
         <button className={styles.button} onClick={this.handleSearch}>
           Search
         </button>
-      </div>
+      </di>
     );
   }
 }
