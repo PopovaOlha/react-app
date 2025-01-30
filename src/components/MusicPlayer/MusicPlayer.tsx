@@ -6,8 +6,8 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
   private audioRef = React.createRef<HTMLAudioElement>();
   private tracks: string[] = [
     "../../../public/music/Star Wars- The Imperial March (Darth Vader's Theme).mp3",
-    '../../../public/music/track2.mp3',
-    '../../../public/music/track3.mp3',
+    '../../../public//music/03 Imperial Attack.mp3',
+    '../../../public/music/08 The Battle Of Endor III.mp3',
   ];
 
   constructor(props: object) {

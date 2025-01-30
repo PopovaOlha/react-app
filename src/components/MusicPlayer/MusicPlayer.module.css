@@ -1,6 +1,6 @@
 .musicPlayer {
   position: fixed;
-  bottom: 10px;
+  bottom: 5px;
   right: 5px;
   background: rgba(0, 0, 0, 0.9);
   padding: 10px 20px;
@@ -44,7 +44,7 @@
 }
 @media (max-width: 1024px) {
   .musicPlayer {
-    bottom: 10px;
+    bottom: 5px;
     right: 10px;
     padding: 8px 15px;
     gap: 8px;
@@ -53,7 +53,7 @@
 
 @media (max-width: 768px) {
   .musicPlayer {
-    bottom: 7px;
+    bottom: 3px;
     right: 5px;
     padding: 6px 12px;
     gap: 5px;

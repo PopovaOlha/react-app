@@ -1,11 +1,13 @@
 import { Component } from 'react';
 import styles from './Footer.module.css';
+import logo from '../../assets/rs-logo.svg';
 
 class Footer extends Component {
   render(): JSX.Element {
     return (
       <footer className={styles.footer}>
-        <p>© {new Date().getFullYear()}</p>
+        <img src={logo} alt="React School logo" />
+        <span>© {new Date().getFullYear()}</span>
       </footer>
     );
   }
