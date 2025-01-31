@@ -36,10 +36,19 @@ export interface MusicPlayerState {
   volume: number;
   currentTrackIndex: number;
 }
+export interface State {
+  hasError: boolean;
+}
+
 export interface Props {
-  children: ReactNode;
+  children?: ReactNode;
+  errorMessage: string;
+  consoleErrors: string[];
+  onClose: () => void;
 }
 
 export interface State {
   hasError: boolean;
+  errorMessage: string;
+  consoleErrors: string[];
 }

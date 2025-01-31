@@ -3,7 +3,8 @@ import styles from './ThrowErrorButton.module.css';
 
 class ThrowErrorButton extends Component {
   throwError = (): void => {
-    throw new Error('Test Error');
+    console.error('Test Console Error: Something went wrong!');
+    throw new Error('Test Error: Button Click Error!');
   };
 
   render(): JSX.Element {

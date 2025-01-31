@@ -8,7 +8,7 @@ class Footer extends Component {
     return (
       <footer className={styles.footer}>
         <span className={styles.logo}>
-          <img src={logo} alt="React School logo" width={40} height={40} />
+          <img src={logo} alt="React School logo" width={40} height={30} />
         </span>
         <ThrowErrorButton />
       </footer>

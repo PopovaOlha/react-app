@@ -1,25 +1,46 @@
-import { Component, ErrorInfo } from 'react';
-import { Props, State } from '../../interfaces/interfaces';
+import { Component } from 'react';
+import ErrorModal from '../ErrorModal/ErrorModal';
+import { State } from '../../interfaces/interfaces';
 
-class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
+class ErrorBoundary extends Component<{ children: React.ReactNode }, State> {
+  constructor(props: { children: React.ReactNode }) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, errorMessage: '', consoleErrors: [] };
   }
 
-  static getDerivedStateFromError(): State {
-    return { hasError: true };
+  componentDidMount(): void {
+    const originalConsoleError = console.error;
+    console.error = (...args) => {
+      this.setState((prevState) => ({
+        consoleErrors: [...prevState.consoleErrors, args.join(' ')],
+      }));
+      originalConsoleError(...args);
+    };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.error('ErrorBoundary caught an error', error, errorInfo);
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, errorMessage: error.message, consoleErrors: [] };
   }
 
-  render(): JSX.Element {
-    if (this.state.hasError) {
-      return <p>Something went wrong.</p>;
-    }
-    return this.props.children ? <>{this.props.children}</> : <></>;
+  closeModal = (): void => {
+    this.setState({ hasError: false, errorMessage: '', consoleErrors: [] });
+  };
+
+  render(): React.ReactNode {
+    const { hasError, errorMessage, consoleErrors } = this.state;
+
+    return (
+      <div>
+        {(hasError || consoleErrors.length > 0) && (
+          <ErrorModal
+            errorMessage={errorMessage}
+            consoleErrors={consoleErrors}
+            onClose={this.closeModal}
+          />
+        )}
+        {this.props.children}
+      </div>
+    );
   }
 }
 
