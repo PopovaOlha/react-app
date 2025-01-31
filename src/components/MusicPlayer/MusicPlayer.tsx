@@ -5,16 +5,16 @@ import { MusicPlayerState } from '../../interfaces/interfaces';
 class MusicPlayer extends Component<object, MusicPlayerState> {
   private audioRef = React.createRef<HTMLAudioElement>();
   private tracks: string[] = [
-    "../../../public/music/Star Wars- The Imperial March (Darth Vader's Theme).mp3",
-    '../../../public//music/03 Imperial Attack.mp3',
-    '../../../public/music/08 The Battle Of Endor III.mp3',
+    "/music/Star Wars- The Imperial March (Darth Vader's Theme).mp3",
+    '/music/03 Imperial Attack.mp3',
+    '/music/08 The Battle Of Endor III.mp3',
   ];
 
   constructor(props: object) {
     super(props);
     this.state = {
-      isPlaying: false,
-      volume: 0.5,
+      isPlaying: false, // Always start as false to prevent incorrect UI state
+      volume: parseFloat(localStorage.getItem('volume') || '0.5'),
       currentTrackIndex: this.getRandomTrackIndex(),
     };
   }
@@ -25,20 +25,24 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
 
   handlePlayPause = (): void => {
     const audio = this.audioRef.current;
-    if (audio) {
-      if (audio.paused) {
-        audio.play();
-        this.setState({ isPlaying: true });
-      } else {
-        audio.pause();
-        this.setState({ isPlaying: false });
-      }
+    if (!audio) return;
+
+    if (audio.paused) {
+      audio
+        .play()
+        .then(() => {
+          this.setState({ isPlaying: true }, this.saveState);
+        })
+        .catch((err) => console.error('Playback error:', err));
+    } else {
+      audio.pause();
+      this.setState({ isPlaying: false }, this.saveState);
     }
   };
 
   handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const newVolume = Number(event.target.value);
-    this.setState({ volume: newVolume });
+    this.setState({ volume: newVolume }, this.saveState);
 
     if (this.audioRef.current) {
       this.audioRef.current.volume = newVolume;
@@ -47,24 +51,42 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
 
   handleTrackEnd = (): void => {
     this.setState({ currentTrackIndex: this.getRandomTrackIndex() }, () => {
-      if (this.audioRef.current) {
+      if (this.audioRef.current && this.state.isPlaying) {
         this.audioRef.current.play();
       }
     });
   };
 
+  saveState = (): void => {
+    localStorage.setItem('isPlaying', String(this.state.isPlaying));
+    localStorage.setItem('volume', String(this.state.volume));
+  };
+
   componentDidMount(): void {
     const audio = this.audioRef.current;
-    if (audio) {
-      audio.play();
+    if (!audio) return;
+
+    audio.volume = this.state.volume; // Restore volume setting
+
+    // Check if music was playing before reload
+    const wasPlaying = localStorage.getItem('isPlaying') === 'true';
+    if (wasPlaying) {
+      audio
+        .play()
+        .then(() => {
+          this.setState({ isPlaying: true });
+        })
+        .catch(() => {
+          this.setState({ isPlaying: false }); // Autoplay blocked
+        });
     }
   }
 
   componentWillUnmount(): void {
-    const audio = this.audioRef.current;
-    if (audio) {
-      audio.pause();
+    if (this.audioRef.current) {
+      this.audioRef.current.pause();
     }
+    this.saveState();
   }
 
   render(): JSX.Element {
@@ -90,7 +112,7 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
           className={styles.volumeSlider}
         />
 
-        <audio ref={this.audioRef} loop autoPlay onEnded={this.handleTrackEnd}>
+        <audio ref={this.audioRef} onEnded={this.handleTrackEnd}>
           <source src={this.tracks[currentTrackIndex]} type="audio/mp3" />
           Your browser does not support the audio element.
         </audio>

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface SearchProps {
   onSearch: (searchTerm: string) => void;
 }
@@ -33,4 +35,11 @@ export interface MusicPlayerState {
   isPlaying: boolean;
   volume: number;
   currentTrackIndex: number;
+}
+export interface Props {
+  children: ReactNode;
+}
+
+export interface State {
+  hasError: boolean;
 }

@@ -29,7 +29,7 @@
 }
 
 .playPauseButton:hover {
-  background-color: #00bfff;
+  background-color: #0ff;
   transition: 0.3s;
   color: #000;
 }

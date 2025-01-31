@@ -17,7 +17,7 @@
 }
 
 input:hover {
-  border: 2px solid #00bfff;
+  border: 2px solid #0ff;
 }
 
 .button {
@@ -32,5 +32,5 @@ input:hover {
 }
 
 .button:hover {
-  background: #00bfff;
+  background: #0ff;
 }
