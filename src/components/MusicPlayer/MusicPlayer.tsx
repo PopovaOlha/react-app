@@ -13,7 +13,7 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
   constructor(props: object) {
     super(props);
     this.state = {
-      isPlaying: false, // Always start as false to prevent incorrect UI state
+      isPlaying: false,
       volume: parseFloat(localStorage.getItem('volume') || '0.5'),
       currentTrackIndex: this.getRandomTrackIndex(),
     };

@@ -1,0 +1,15 @@
+.throwErrorButton {
+  background-color: #ff4d4d;
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(255, 162, 0);
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+	margin-bottom: 5px;
+}
+
+.throwErrorButton:hover {
+  background-color: #cc0000;
+}
