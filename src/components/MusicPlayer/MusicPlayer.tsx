@@ -77,7 +77,7 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
           this.setState({ isPlaying: true });
         })
         .catch(() => {
-          this.setState({ isPlaying: false }); // Autoplay blocked
+          this.setState({ isPlaying: false });
         });
     }
   }
