@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
    "format:fix": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\" && eslint --fix",
-    "prepare": "mkdir -p .husky && chmod ug+x .husky/*"
+    "prepare": "husky install"
   },
   "dependencies": {
     "lint": "^0.8.19",
