@@ -120,5 +120,3 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
     );
   }
 }
-
-export default MusicPlayer;
