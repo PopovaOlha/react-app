@@ -1,0 +1,18 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .app {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    margin-bottom: 100px;
+  }
+}
