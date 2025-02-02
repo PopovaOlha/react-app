@@ -25,6 +25,6 @@ body {
     height: 100vh;
     background: url('./assets/darth-vader-poster-wallpaper.jpg') no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: scroll;
   }
 }
