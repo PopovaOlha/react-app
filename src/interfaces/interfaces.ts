@@ -31,11 +31,13 @@ export interface APICharacter {
   birth_year: string;
   url: string;
 }
+
 export interface MusicPlayerState {
   isPlaying: boolean;
   volume: number;
   currentTrackIndex: number;
 }
+
 export interface State {
   hasError: boolean;
 }

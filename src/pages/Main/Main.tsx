@@ -20,7 +20,10 @@ class Main extends Component {
       this.setState({ characters, loading: false });
     } catch (error) {
       console.error(error);
-      this.setState({ error: 'Failed to load characters', loading: false });
+      this.setState({
+        error: 'Failed to load characters',
+        loading: false,
+      });
     }
   }
 
@@ -33,6 +36,10 @@ class Main extends Component {
     this.fetchAndSetCharacters(searchTerm);
   };
 
+  closeErrorModal = (): void => {
+    this.setState({ showErrorModal: false });
+  };
+
   render(): JSX.Element {
     const { characters, loading, error } = this.state;
 
@@ -43,7 +50,6 @@ class Main extends Component {
         <Search onSearch={this.handleSearch} />
 
         {loading && <Loader />}
-        {error && <p className={styles.error}>{error}</p>}
         {!loading && !error && <CardList characters={characters} />}
       </div>
     );

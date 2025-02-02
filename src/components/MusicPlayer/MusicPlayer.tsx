@@ -66,9 +66,8 @@ class MusicPlayer extends Component<object, MusicPlayerState> {
     const audio = this.audioRef.current;
     if (!audio) return;
 
-    audio.volume = this.state.volume; // Restore volume setting
+    audio.volume = this.state.volume;
 
-    // Check if music was playing before reload
     const wasPlaying = localStorage.getItem('isPlaying') === 'true';
     if (wasPlaying) {
       audio
