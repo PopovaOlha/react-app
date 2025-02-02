@@ -18,16 +18,15 @@ body {
     height: 100vh;
     background: url('./assets/darth-vader-poster-wallpaper.jpg') no-repeat;
     background-size: cover;
-    background-attachment: scroll;
+    background-attachment: fixed;
   }
 }
 
 @media (max-width: 480px) {
   body {
-    max-height: 100vh;
-    overflow-y: auto;
+    overflow-y: scroll;
     background: url('./assets/darth-vader-poster-wallpaper.jpg') no-repeat;
     background-size: cover;
-    background-attachment: scroll;
+    background-attachment: fixed;
   }
 }
