@@ -22,7 +22,8 @@ body {
 }
 @media (max-width: 480px) {
   body {
-    height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
     background: url('./assets/darth-vader-poster-wallpaper.jpg') no-repeat;
     background-size: cover;
     background-attachment: scroll;
