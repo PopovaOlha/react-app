@@ -3,7 +3,7 @@ import Footer from '../Footer/Footer';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import styles from './App.module.css';
 
-const App = (): JSX.Element => {
+const App: React.FC = () => {
   return (
     <div className={styles.app}>
       <ErrorBoundary>

@@ -36,7 +36,9 @@ const Main: React.FC = () => {
       <h1 className={styles.title}>Star Wars Characters</h1>
       <Search onSearch={fetchAndSetCharacters} />
       {loading && <Loader />}
-      {!loading && !error && <CardList characters={characters} />}
+      {!loading && !error && (
+        <CardList characters={characters} loading={loading} error={error} />
+      )}
     </div>
   );
 };
