@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchCharacters } from '../../api/starWarsApi.ts';
 import CardList from '../../components/CardList/CardList';
 import Search from '../../components/Search/Search';
@@ -6,54 +6,39 @@ import Loader from '../../components/Loader/Loader';
 import { Character } from '../../interfaces/interfaces';
 import styles from './Main.module.css';
 
-class Main extends Component {
-  state = {
-    characters: [] as Character[],
-    loading: false,
-    error: '',
-  };
+const Main: React.FC = () => {
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  async fetchAndSetCharacters(searchTerm: string = ''): Promise<void> {
-    this.setState({ loading: true, error: '' });
+  const fetchAndSetCharacters = async (searchTerm: string = '') => {
+    setLoading(true);
+    setError('');
+
     try {
       const characters = await fetchCharacters(searchTerm);
-      this.setState({ characters, loading: false });
+      setCharacters(characters);
     } catch (error) {
       console.error(error);
-      this.setState({
-        error: 'Failed to load characters',
-        loading: false,
-      });
+      setError('Failed to load characters');
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  componentDidMount(): void {
+  useEffect(() => {
     const savedSearchTerm = localStorage.getItem('searchTerm') || '';
-    this.fetchAndSetCharacters(savedSearchTerm);
-  }
+    fetchAndSetCharacters(savedSearchTerm);
+  }, []);
 
-  handleSearch = (searchTerm: string): void => {
-    this.fetchAndSetCharacters(searchTerm);
-  };
-
-  closeErrorModal = (): void => {
-    this.setState({ showErrorModal: false });
-  };
-
-  render(): JSX.Element {
-    const { characters, loading, error } = this.state;
-
-    return (
-      <div className={styles.main}>
-        <h1 className={styles.title}>Star Wars Characters</h1>
-
-        <Search onSearch={this.handleSearch} />
-
-        {loading && <Loader />}
-        {!loading && !error && <CardList characters={characters} />}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.main}>
+      <h1 className={styles.title}>Star Wars Characters</h1>
+      <Search onSearch={fetchAndSetCharacters} />
+      {loading && <Loader />}
+      {!loading && !error && <CardList characters={characters} />}
+    </div>
+  );
+};
 
 export default Main;
