@@ -42,6 +42,7 @@ export default tseslint.config(
         'warn',
         { argsIgnorePattern: '^_' },
       ],
+      'react/prop-types': 'off',
     },
     settings: {
       react: {
