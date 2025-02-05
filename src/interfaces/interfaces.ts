@@ -54,3 +54,6 @@ export interface State {
   errorMessage: string;
   consoleErrors: string[];
 }
+export interface CardListProps {
+  characters: CardProps['character'][];
+}
