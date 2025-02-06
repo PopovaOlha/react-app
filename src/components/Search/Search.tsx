@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import styles from './Search.module.css';
 import { SearchProps } from '../../interfaces/interfaces';
+import { useStoredSearchQuery } from '../../hooks/useStoredSearchQuery';
 
 const Search: React.FC<SearchProps> = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState(
-    localStorage.getItem('searchTerm') || ''
-  );
+  const [searchTerm, setSearchTerm] = useStoredSearchQuery();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -13,7 +11,6 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
 
   const handleSearch = () => {
     const trimmedTerm = searchTerm.trim();
-    localStorage.setItem('searchTerm', trimmedTerm);
     onSearch(trimmedTerm);
   };
 
