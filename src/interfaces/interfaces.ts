@@ -18,6 +18,7 @@ export interface Character {
 
 export interface CardProps {
   character: Character;
+  onClick: (id: string) => void;
 }
 
 export interface CardListProps {
