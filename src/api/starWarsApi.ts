@@ -1,14 +1,12 @@
 import { APICharacter, Character } from '../interfaces/interfaces';
-import { API_URL } from '../config/api.ts';
+import { API_URL } from '../config/api';
 
 export const fetchCharacters = async (
-  searchTerm = ''
+  searchTerm = '',
+  page = 1
 ): Promise<Character[]> => {
   try {
-    const url = searchTerm
-      ? `${API_URL}?search=${encodeURIComponent(searchTerm)}`
-      : API_URL;
-
+    const url = `${API_URL}?search=${encodeURIComponent(searchTerm)}&page=${page}`;
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -19,7 +17,6 @@ export const fetchCharacters = async (
 
     return data.results.map((char: APICharacter) => {
       const id = char.url.match(/\/people\/(\d+)\//)?.[1] || 'placeholder';
-
       return {
         id,
         name: char.name,
