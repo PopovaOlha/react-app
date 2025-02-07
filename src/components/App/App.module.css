@@ -1,8 +1,8 @@
 .app {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 30px;
+  max-width: 1200px;
+  margin: 4px auto;
+  padding: 20px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

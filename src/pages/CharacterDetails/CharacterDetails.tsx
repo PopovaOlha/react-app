@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchCharacters } from '../../api/starWarsApi';
 import styles from './CharacterDetails.module.css';
-import Loader from '../Loader/Loader';
+import Loader from '../../components/Loader/Loader';
 import { Character } from '../../interfaces/interfaces';
 
 const CharacterDetails: React.FC = () => {

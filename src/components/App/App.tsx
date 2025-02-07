@@ -1,16 +1,16 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from '../../pages/Main/Main';
-import Footer from '../Footer/Footer';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import styles from './App.module.css';
+import CharacterDetails from '../../pages/CharacterDetails/CharacterDetails';
 
 const App: React.FC = () => {
   return (
-    <div className={styles.app}>
-      <ErrorBoundary>
-        <Main />
-        <Footer />
-      </ErrorBoundary>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Main />}>
+          <Route path="details/:id" element={<CharacterDetails />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 };
 

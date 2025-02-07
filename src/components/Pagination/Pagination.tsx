@@ -13,21 +13,21 @@ const Pagination: React.FC<{ totalPages: number }> = ({ totalPages }) => {
   return (
     <div className={styles.pagination}>
       <button
-        className={styles.button}
+        className={styles.arrow}
         onClick={() => updatePage(currentPage - 1)}
         disabled={currentPage <= 1}
       >
-        Previous
+        &#8592;
       </button>
       <span className={styles.pageInfo}>
         Page {currentPage} of {totalPages}
       </span>
       <button
-        className={styles.button}
+        className={styles.arrow}
         onClick={() => updatePage(currentPage + 1)}
         disabled={currentPage >= totalPages}
       >
-        Next
+        &#8594;
       </button>
     </div>
   );
