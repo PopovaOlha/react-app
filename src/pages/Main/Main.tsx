@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
+import { Outlet, useSearchParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchCharacters } from '../../api/starWarsApi';
 import Search from '../../components/Search/Search';
@@ -12,14 +12,15 @@ import Footer from '../../components/Footer/Footer';
 const Main: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
   const searchTerm = searchParams.get('query') || '';
   const page = Number(searchParams.get('page')) || 1;
-  const selectedId = searchParams.get('details');
 
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [totalPages, setTotalPages] = useState(1);
+  const selectedId = searchParams.get('details');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,31 +40,21 @@ const Main: React.FC = () => {
     fetchData();
   }, [searchTerm, page]);
 
-  const handleLeftSectionClick = () => {
-    navigate(`/?query=${searchTerm}&page=${page}`);
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.main}>
         <h1 className={styles.title}>Star Wars Characters</h1>
         <Search
-          onSearch={(searchTerm: string) =>
-            navigate(`/?query=${searchTerm}&page=1`)
-          }
+          onSearch={(query) => navigate(`/search?query=${query}&page=1`)}
         />
         {loading && <Loader />}
         {error && <p className={styles.error}>{error}</p>}
         {!loading && !error && (
           <div className={styles.content}>
-            <div
-              className={styles.leftSection}
-              onClick={handleLeftSectionClick}
-            >
+            <div className={styles.leftSection}>
               <CardList
                 characters={characters}
-                loading={loading}
-                error={error}
+                onCardClick={(id) => navigate(`/details=${id}`)}
               />
             </div>
             {selectedId && (
@@ -75,10 +66,9 @@ const Main: React.FC = () => {
         )}
         <Pagination totalPages={totalPages} />
       </div>
-      <div className={styles.footer}>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
+
 export default Main;

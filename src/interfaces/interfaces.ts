@@ -23,8 +23,7 @@ export interface CardProps {
 
 export interface CardListProps {
   characters: Character[];
-  loading: boolean;
-  error: string | null;
+  onCardClick: (id: string) => void;
 }
 
 export interface APICharacter {
@@ -57,4 +56,19 @@ export interface State {
 }
 export interface CardListProps {
   characters: CardProps['character'][];
+}
+
+export interface CharacterDetailsProps {
+  searchTerm: string;
+  page: number;
+}
+
+export interface ApiResponse {
+  characters: Character[];
+  totalPages: number;
+}
+
+export interface PaginationProps {
+  totalPages: number;
+  currentPage: number;
 }

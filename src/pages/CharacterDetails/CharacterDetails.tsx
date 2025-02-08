@@ -1,46 +1,51 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { fetchCharacters } from '../../api/starWarsApi';
-import styles from './CharacterDetails.module.css';
-import Loader from '../../components/Loader/Loader';
+import { useSearchParams } from 'react-router-dom';
+import { fetchCharacterDetails } from '../../api/starWarsApi';
 import { Character } from '../../interfaces/interfaces';
+import Loader from '../../components/Loader/Loader';
 
 const CharacterDetails: React.FC = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [character, setCharacter] = useState<Character | null>(null);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('details');
+
+  const [characterDetails, setCharacterDetails] = useState<Character | null>(
+    null
+  );
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
-    const fetchDetails = async () => {
+
+    const fetchData = async () => {
       setLoading(true);
+      setError(null);
       try {
-        const data = await fetchCharacters(id);
-        setCharacter(data[0]);
+        console.log(`Fetching details for character ID: ${id}`);
+        const data = await fetchCharacterDetails(id);
+        console.log('Fetched data:', data);
+
+        setCharacterDetails(data);
+      } catch (err) {
+        console.error('Error fetching character details:', err);
+        setError('Failed to load character details.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchDetails();
+    fetchData();
   }, [id]);
 
-  const closeDetails = () => {
-    navigate(-1);
-  };
-
   if (loading) return <Loader />;
-  if (!character) return null;
+  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (!characterDetails) return <p>No details available.</p>;
 
   return (
-    <div className={styles.details}>
-      <button className={styles.closeButton} onClick={closeDetails}>
-        ✖
-      </button>
-      <h2>{character.name}</h2>
-      <p>{character.description}</p>
-      <img src={character.image} alt={character.name} />
+    <div>
+      <h2>{characterDetails.name}</h2>
+      <p>{characterDetails.description}</p>
+      <img src={characterDetails.image} alt={characterDetails.name} />
     </div>
   );
 };

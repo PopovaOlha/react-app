@@ -29,3 +29,28 @@ export const fetchCharacters = async (
     throw new Error('Failed to fetch characters');
   }
 };
+
+export const fetchCharacterDetails = async (id: string): Promise<Character> => {
+  try {
+    const url = `${API_URL}/${id}/`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch character details');
+    }
+
+    const data: APICharacter = await response.json();
+
+    return {
+      id,
+      name: data.name,
+      description: data.birth_year || 'No description available',
+      image: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`,
+      character: data.name,
+    };
+  } catch (error) {
+    console.error('Error fetching character details:', error);
+    throw new Error('Failed to fetch character details');
+  }
+};

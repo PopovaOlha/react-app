@@ -4,10 +4,15 @@ import styles from './Pagination.module.css';
 const Pagination: React.FC<{ totalPages: number }> = ({ totalPages }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
+  const searchTerm = searchParams.get('query') || '';
+  const selectedId = searchParams.get('details') || '';
 
   const updatePage = (newPage: number) => {
-    searchParams.set('page', newPage.toString());
-    setSearchParams(searchParams);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('page', newPage.toString());
+    if (searchTerm) newParams.set('query', searchTerm);
+    if (selectedId) newParams.set('details', selectedId);
+    setSearchParams(newParams);
   };
 
   return (

@@ -1,16 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from '../../pages/Main/Main';
 import CharacterDetails from '../../pages/CharacterDetails/CharacterDetails';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Main />}>
-          <Route path="details/:id" element={<CharacterDetails />} />
-        </Route>
-      </Routes>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/search" element={<Main />} />
+          <Route path="details:id" element={<CharacterDetails />} />
+        </Routes>
+      </Router>
+    </ErrorBoundary>
   );
 };
 
