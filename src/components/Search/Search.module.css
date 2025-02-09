@@ -1,0 +1,79 @@
+.searchContainer {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid rgb(255, 162, 0);
+  background: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 162, 0);
+  outline: none;
+  border-radius: 5px;
+}
+
+.input:hover {
+  border: 2px solid #0ff;
+}
+
+.button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background: rgb(255, 162, 0);
+  color: #000;
+  border: 2px solid #ffd700;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: #0ff;
+}
+
+@media (max-width: 480px) {
+  .input {
+    padding: 8px;
+    font-size: 14px;
+    width: 80%;
+  }
+
+  .button {
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 80%;
+  }
+}
+
+@media (max-width: 767px) {
+  .input {
+    padding: 9px;
+    font-size: 15px;
+    width: 70%;
+  }
+
+  .button {
+    padding: 9px 14px;
+    font-size: 15px;
+    width: 70%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .input {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .button {
+    padding: 10px 15px;
+    font-size: 16px;
+    width: auto;
+  }
+}
