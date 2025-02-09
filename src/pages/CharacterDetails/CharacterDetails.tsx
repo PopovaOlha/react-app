@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { fetchCharacterDetails } from '../../api/starWarsApi';
-import { Character } from '../../interfaces/interfaces';
+import { Character, CharacterDetailsProps } from '../../interfaces/interfaces';
 import Loader from '../../components/Loader/Loader';
+import styles from './CharacterDetails.module.css';
 
-const CharacterDetails: React.FC = () => {
+const CharacterDetails: React.FC<CharacterDetailsProps> = ({
+  searchTerm,
+  page,
+}) => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const id = searchParams.get('details');
+  const id = searchParams.get('details'); // Retrieve the character ID from URL
 
   const [characterDetails, setCharacterDetails] = useState<Character | null>(
     null
@@ -15,20 +20,20 @@ const CharacterDetails: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setError('Character ID is missing in the URL.');
+      return;
+    }
 
     const fetchData = async () => {
       setLoading(true);
       setError(null);
       try {
-        console.log(`Fetching details for character ID: ${id}`);
         const data = await fetchCharacterDetails(id);
-        console.log('Fetched data:', data);
-
         setCharacterDetails(data);
       } catch (err) {
         console.error('Error fetching character details:', err);
-        setError('Failed to load character details.');
+        setError('Failed to load character details. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -36,16 +41,35 @@ const CharacterDetails: React.FC = () => {
 
     fetchData();
   }, [id]);
-
   if (loading) return <Loader />;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
-  if (!characterDetails) return <p>No details available.</p>;
+  if (!characterDetails) return <p>No details available for this character.</p>;
+
+  const closeDetails = () => {
+    navigate(`/?query=${searchTerm}&page=${page}`);
+  };
 
   return (
-    <div>
+    <div className={styles.details}>
+      <button className={styles.closeButton} onClick={closeDetails}>
+        ✖
+      </button>
       <h2>{characterDetails.name}</h2>
       <p>{characterDetails.description}</p>
       <img src={characterDetails.image} alt={characterDetails.name} />
+      <p>
+        <strong>Gender:</strong> {characterDetails.gender}
+      </p>
+      <p>
+        <strong>HairColor:</strong> {characterDetails.hairColor}
+      </p>
+      <p>
+        <strong>Height:</strong> {characterDetails.height}
+      </p>
+      <p>
+        <strong>HomeWorld:</strong> {characterDetails.homeworld}
+      </p>
+      <div></div>
     </div>
   );
 };

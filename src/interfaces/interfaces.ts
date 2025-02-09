@@ -10,10 +10,18 @@ export interface SearchState {
 
 export interface Character {
   id: string;
-  image: string;
   name: string;
   description: string;
+  image: string;
   character: string;
+  films: string[];
+  eyeColor: string;
+  gender: string;
+  hairColor: string;
+  height: string;
+  homeworld: string;
+  mass: string;
+  skinColor: string;
 }
 
 export interface CardProps {
@@ -29,6 +37,14 @@ export interface CardListProps {
 export interface APICharacter {
   name: string;
   birth_year: string;
+  eye_color: string;
+  films: string[];
+  gender: string;
+  hair_color: string;
+  height: string;
+  homeworld: string;
+  mass: string;
+  skin_color: string;
   url: string;
 }
 

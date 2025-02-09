@@ -23,6 +23,14 @@ export const fetchCharacters = async (
         description: char.birth_year || 'No description available',
         image: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`,
         character: char.name,
+        films: char.films,
+        eyeColor: char.eye_color,
+        gender: char.gender,
+        hairColor: char.hair_color,
+        height: char.height,
+        homeworld: char.homeworld,
+        mass: char.mass,
+        skinColor: char.skin_color,
       };
     });
   } catch {
@@ -34,7 +42,12 @@ export const fetchCharacterDetails = async (id: string): Promise<Character> => {
   try {
     const url = `${API_URL}/${id}/`;
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to fetch character details');
@@ -48,6 +61,14 @@ export const fetchCharacterDetails = async (id: string): Promise<Character> => {
       description: data.birth_year || 'No description available',
       image: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`,
       character: data.name,
+      eyeColor: data.eye_color,
+      films: data.films,
+      gender: data.gender,
+      hairColor: data.hair_color,
+      height: data.height,
+      homeworld: data.homeworld,
+      mass: data.mass,
+      skinColor: data.skin_color,
     };
   } catch (error) {
     console.error('Error fetching character details:', error);

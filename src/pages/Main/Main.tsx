@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { fetchCharacters } from '../../api/starWarsApi';
 import Search from '../../components/Search/Search';
 import CardList from '../../components/CardList/CardList';
-import Pagination from '../../components/Pagination/Pagination';
 import Loader from '../../components/Loader/Loader';
 import { Character } from '../../interfaces/interfaces';
 import styles from './Main.module.css';
 import Footer from '../../components/Footer/Footer';
+import CharacterDetails from '../CharacterDetails/CharacterDetails';
+import Pagination from '../../components/Pagination/Pagination';
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
@@ -54,12 +55,15 @@ const Main: React.FC = () => {
             <div className={styles.leftSection}>
               <CardList
                 characters={characters}
-                onCardClick={(id) => navigate(`/details=${id}`)}
+                onCardClick={(id) =>
+                  navigate(`/?query=${searchTerm}&page=${page}&details=${id}`)
+                }
               />
             </div>
             {selectedId && (
               <div className={styles.rightSection}>
                 <Outlet />
+                <CharacterDetails searchTerm={searchTerm} page={page} />
               </div>
             )}
           </div>
