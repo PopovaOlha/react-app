@@ -1,0 +1,109 @@
+.musicPlayer {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgb(255, 162, 0);
+  font-family: 'Star Jedi', sans-serif;
+}
+
+.playPauseButton {
+  background-color: transparent;
+  border: 2px solid #ffd700;
+  border-radius: 5px;
+  color: rgb(255, 162, 0);
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.playPauseButton:hover {
+  background-color: #0ff;
+  transition: 0.3s;
+  color: #000;
+}
+
+.icon {
+  font-size: 20px;
+}
+.volumeSlider {
+  width: 80px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+@media (max-width: 1024px) {
+  .musicPlayer {
+    bottom: 5px;
+    right: 10px;
+    padding: 8px 15px;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .musicPlayer {
+    bottom: 3px;
+    right: 5px;
+    padding: 6px 12px;
+    gap: 5px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .musicPlayer {
+    bottom: 5px;
+    right: 2px;
+    padding: 5px 10px;
+    gap: 4px;
+  }
+}
+@media (max-width: 768px) {
+  .playPauseButton {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .playPauseButton {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+}
+
+.volumeSlider {
+  width: 80px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.volumeSlider:hover {
+  filter: brightness(1.2);
+}
+
+@media (max-width: 768px) {
+  .volumeSlider {
+    width: 60px;
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .volumeSlider {
+    width: 50px;
+    margin-left: 0;
+  }
+}
