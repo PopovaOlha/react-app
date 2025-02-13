@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from '../../pages/Main/Main';
 import CharacterDetails from '../../pages/CharacterDetails/CharacterDetails';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import NotFound from '../NotFound/NotFound';
+import NotFound from '../../pages/NotFound/NotFound';
 
 const App: React.FC = () => {
   return (

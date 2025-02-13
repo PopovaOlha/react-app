@@ -22,6 +22,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
         value={searchTerm}
         onChange={handleInputChange}
         placeholder="Search for a character..."
+        data-testid="search-input"
       />
       <button className={styles.button} onClick={handleSearch}>
         Search

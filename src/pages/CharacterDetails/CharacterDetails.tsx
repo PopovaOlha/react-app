@@ -11,7 +11,7 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
 }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const id = searchParams.get('details'); // Retrieve the character ID from URL
+  const id = searchParams.get('details');
 
   const [characterDetails, setCharacterDetails] = useState<Character | null>(
     null
