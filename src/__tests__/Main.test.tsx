@@ -66,7 +66,6 @@ describe('Main', () => {
   const mockSearchParams = new URLSearchParams('query=Luke&page=1');
 
   beforeEach(() => {
-    // Mock useNavigate and useSearchParams
     (useSearchParams as Mock).mockReturnValue([mockSearchParams]);
     (useNavigate as Mock).mockReturnValue(mockNavigate);
   });

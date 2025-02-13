@@ -38,7 +38,6 @@ describe('CharacterDetails', () => {
     const loadingIndicator = await screen.findByTestId('loading');
     expect(loadingIndicator).toBeInTheDocument();
 
-    // Wait for the loading to finish
     await waitFor(() =>
       expect(screen.queryByTestId('loading')).toBeInTheDocument()
     );

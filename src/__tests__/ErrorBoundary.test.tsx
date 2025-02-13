@@ -5,12 +5,10 @@ import { vi } from 'vitest';
 
 describe('ErrorBoundary', () => {
   beforeEach(() => {
-    // Mock console.error to suppress error logs
     vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
-    // Restore the original console.error
     vi.restoreAllMocks();
   });
 
@@ -21,10 +19,8 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    // Click the button to throw an error
     fireEvent.click(screen.getByText('Throw Error'));
 
-    // Wait for the ErrorModal to appear
     expect(await screen.findByText('Error Log')).toBeInTheDocument();
     expect(
       await screen.findByText('Test Console Error: Something went wrong!')
@@ -38,7 +34,6 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    // Click the button to throw an error
     fireEvent.click(screen.getByText('Throw Error'));
   });
 
@@ -49,10 +44,8 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    // Click the button to throw an error
     fireEvent.click(screen.getByText('Throw Error'));
 
-    // Wait for the console error to appear
     const consoleError = await screen.findByText(
       'Test Console Error: Something went wrong!'
     );
@@ -66,16 +59,12 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    // Click the button to throw an error
     fireEvent.click(screen.getByText('Throw Error'));
 
-    // Wait for the ErrorModal to appear
     await screen.findByText('Error Log');
 
-    // Click the close button
     fireEvent.click(screen.getByText('Close'));
 
-    // Check if the ErrorModal is closed
     expect(screen.queryByText('Error Log')).not.toBeInTheDocument();
   });
 
@@ -86,7 +75,6 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    // Check if the ErrorModal is not displayed
     expect(screen.queryByText('Error Log')).not.toBeInTheDocument();
   });
 });

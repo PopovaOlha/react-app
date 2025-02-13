@@ -2,6 +2,9 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import CardList from '../components/CardList/CardList';
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
+
+const mockOnCardClick = vi.fn();
 
 const mockCharacters = [
   {
@@ -36,9 +39,6 @@ const mockCharacters = [
   },
 ];
 
-// Mock function using React Testing Library
-const mockOnCardClick = () => {};
-
 test('renders character list correctly', () => {
   render(
     <BrowserRouter>
@@ -46,7 +46,6 @@ test('renders character list correctly', () => {
     </BrowserRouter>
   );
 
-  // Check if the names of the characters are rendered
   expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
   expect(screen.getByText('Darth Vader')).toBeInTheDocument();
 });
@@ -58,7 +57,6 @@ test('displays "No characters found" when the list is empty', () => {
     </BrowserRouter>
   );
 
-  // Check if the "No characters found" message is displayed
   expect(screen.getByText('No characters found')).toBeInTheDocument();
 });
 
@@ -69,9 +67,5 @@ test('calls onCardClick when a card is clicked', () => {
     </BrowserRouter>
   );
 
-  // Click on the first card
   fireEvent.click(screen.getByText('Luke Skywalker'));
-
-  // Check if onCardClick was called (functionality test)
-  // For demonstration purposes, assuming that mockOnCardClick is just called here
 });
