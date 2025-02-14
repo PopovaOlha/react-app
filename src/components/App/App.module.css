@@ -1,0 +1,18 @@
+.app {
+  max-width: 1200px;
+  margin: 4px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .app {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    margin-bottom: 100px;
+  }
+}
