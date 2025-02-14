@@ -1,5 +1,5 @@
-import { APICharacter, Character } from '../interfaces/interfaces';
 import { API_URL } from '../config/api';
+import { APICharacter, Character } from '../interfaces/interfaces';
 
 export const fetchCharacters = async (
   searchTerm = '',
@@ -21,7 +21,7 @@ export const fetchCharacters = async (
         id,
         name: char.name,
         description: char.birth_year || 'No description available',
-        image: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`,
+        image: `../../static/people/${id}.jpg`,
         character: char.name,
         films: char.films,
         eyeColor: char.eye_color,
@@ -59,7 +59,7 @@ export const fetchCharacterDetails = async (id: string): Promise<Character> => {
       id,
       name: data.name,
       description: data.birth_year || 'No description available',
-      image: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`,
+      image: `../../static/people/${id}.jpg`,
       character: data.name,
       eyeColor: data.eye_color,
       films: data.films,
