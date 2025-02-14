@@ -65,3 +65,64 @@
   object-fit: cover;
   margin-top: 15px;
 }
+
+@media (max-width: 1024px) {
+  .details {
+    width: 270px;
+    margin-left: 50px;
+  }
+
+  .details h2 {
+    font-size: 16px;
+  }
+
+  .details p {
+    font-size: 12px;
+  }
+
+  .details img {
+    width: 250px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    width: 220px;
+    margin-left: 20px;
+  }
+
+  .details h2 {
+    font-size: 14px;
+  }
+
+  .details p {
+    font-size: 12px;
+  }
+
+  .details img {
+    width: 200px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .details {
+    width: 100%;
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .details h2 {
+    font-size: 14px;
+  }
+
+  .details p {
+    font-size: 12px;
+  }
+
+  .details img {
+    width: 100%;
+    height: auto;
+  }
+}

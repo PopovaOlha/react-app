@@ -24,6 +24,10 @@ export interface Character {
   skinColor: string;
 }
 
+export interface CharactersState {
+  characters: Character[];
+}
+
 export interface CardProps {
   character: Character;
   onClick: (id: string) => void;
@@ -87,4 +91,28 @@ export interface ApiResponse {
 export interface PaginationProps {
   totalPages: number;
   currentPage: number;
+}
+
+export interface SelectedItemsState {
+  selectedItems: string[];
+}
+
+export type Theme = 'light' | 'dark';
+
+export interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+}
+
+export interface ThemeProviderProps {
+  children: React.ReactNode;
+}
+
+export interface SelectedItemsState {
+  selectedItems: string[];
+}
+
+export interface RootState {
+  selectedItems: SelectedItemsState;
+  characters: Character[];
 }
