@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Footer from '../components/Footer/Footer';
 import logo from '../assets/rss-logo.c19ce1b4.svg';
 import { vi } from 'vitest';
+import ThemeProvider from '../context/ThemeProvider';
 
 vi.mock('../ThrowErrorButto/ThrowErrorButton', () => ({
   default: () => <div>ThrowErrorButton</div>,
@@ -9,7 +10,11 @@ vi.mock('../ThrowErrorButto/ThrowErrorButton', () => ({
 
 describe('Footer', () => {
   it('renders the footer with logo and ThrowErrorButton', () => {
-    render(<Footer />);
+    render(
+      <ThemeProvider>
+        <Footer />
+      </ThemeProvider>
+    );
 
     const footerElement = screen.getByRole('contentinfo');
     expect(footerElement).toBeInTheDocument();

@@ -20,15 +20,15 @@
 }
 
 .loaderContainer {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   background: radial-gradient(circle, #fff 50%, #1a1a1a 100%);
 }
 

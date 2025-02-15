@@ -21,15 +21,7 @@ const Flyout: React.FC = () => {
   };
 
   const handleDownload = () => {
-    const headers = [
-      'ID',
-      'Name',
-      'Description',
-      'Age',
-      'Gender',
-      'Height',
-      'Mass',
-    ];
+    const headers = ['ID', 'Name', 'Description', 'Age', 'Gender', 'Height'];
 
     const csvContent =
       'data:text/csv;charset=utf-8,' +
@@ -42,7 +34,7 @@ const Flyout: React.FC = () => {
               character.description ?? 'N/A',
               character.gender ?? 'Unknown',
               character.height ?? 'Unknown',
-              character.mass ?? 'Unknown',
+              character.eyeColor ?? 'Nnknown',
             ].join(',')
           )
         )

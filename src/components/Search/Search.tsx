@@ -16,6 +16,12 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
     onSearch(trimmedTerm);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className={styles.searchContainer}>
       <input
@@ -23,6 +29,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
         placeholder="Search for a character..."
         data-testid="search-input"
       />

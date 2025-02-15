@@ -7,7 +7,6 @@ import Flyout from '../Flyout/Flyout';
 import styles from './CardList.module.css';
 
 const CardList: React.FC<CardListProps> = ({ characters, onCardClick }) => {
-  // Extract selectedCharacters from Redux state
   const selectedCharacters = useSelector(
     (state: RootState) => state.selectedItems.selectedCharacters
   );
@@ -26,7 +25,6 @@ const CardList: React.FC<CardListProps> = ({ characters, onCardClick }) => {
             onClick={onCardClick}
           />
         ))}
-        {/* Conditionally render Flyout if there are selected characters */}
         {selectedCharacters.length > 0 && <Flyout />}
       </div>
     </div>

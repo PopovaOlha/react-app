@@ -1,8 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter, useNavigate, useSearchParams } from 'react-router-dom';
-import CharacterDetails from '../pages/CharacterDetails/CharacterDetails';
 import { vi, Mock } from 'vitest';
-// Mock the fetchCharacterDetails API
+import CharacterDetails from '../pages/CharacterDetails/CharacterDetails';
+import { ThemeProvider } from '../context/ThemeProvider';
+import { store } from '../store/store';
+
 vi.mock('../../api/starWarsApi', () => ({
   fetchCharacterDetails: vi.fn(),
 }));
@@ -28,11 +31,16 @@ describe('CharacterDetails', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
+
   it('renders character details correctly', async () => {
     render(
-      <MemoryRouter>
-        <CharacterDetails searchTerm="Luke" page={1} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <ThemeProvider>
+            <CharacterDetails searchTerm="Luke" page={1} />
+          </ThemeProvider>
+        </MemoryRouter>
+      </Provider>
     );
 
     const loadingIndicator = await screen.findByTestId('loading');
@@ -41,26 +49,29 @@ describe('CharacterDetails', () => {
     await waitFor(() =>
       expect(screen.queryByTestId('loading')).toBeInTheDocument()
     );
+  });
+
+  it('displays an error message if fetching data fails', async () => {
     render(
-      <MemoryRouter>
-        <CharacterDetails searchTerm="Luke" page={1} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <ThemeProvider>
+            <CharacterDetails searchTerm="Luke" page={1} />
+          </ThemeProvider>
+        </MemoryRouter>
+      </Provider>
     );
   });
 
   it('displays an error message if fetching data fails', async () => {
     render(
-      <MemoryRouter>
-        <CharacterDetails searchTerm="Luke" page={1} />
-      </MemoryRouter>
-    );
-  });
-
-  it('displays an error message if fetching data fails', async () => {
-    render(
-      <MemoryRouter>
-        <CharacterDetails searchTerm="Luke" page={1} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <ThemeProvider>
+            <CharacterDetails searchTerm="Luke" page={1} />
+          </ThemeProvider>
+        </MemoryRouter>
+      </Provider>
     );
   });
 });

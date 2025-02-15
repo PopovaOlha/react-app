@@ -1,54 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import ErrorModal from '../ErrorModal//ErrorModal';
+import { Component } from 'react';
+import ErrorModal from '../ErrorModal/ErrorModal';
+import { State } from '../../interfaces/interfaces';
 
-interface State {
-  hasError: boolean;
-  errorMessage: string;
-  consoleErrors: string[];
-}
+class ErrorBoundary extends Component<{ children: React.ReactNode }, State> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, errorMessage: '', consoleErrors: [] };
+  }
 
-const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [state, setState] = useState<State>({
-    hasError: false,
-    errorMessage: '',
-    consoleErrors: [],
-  });
-
-  useEffect(() => {
+  componentDidMount(): void {
     const originalConsoleError = console.error;
     console.error = (...args) => {
-      setState((prevState) => ({
-        ...prevState,
+      this.setState((prevState) => ({
         consoleErrors: [...prevState.consoleErrors, args.join(' ')],
       }));
       originalConsoleError(...args);
     };
+  }
 
-    return () => {
-      console.error = originalConsoleError;
-    };
-  }, []);
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, errorMessage: error.message, consoleErrors: [] };
+  }
 
-  const closeModal = (): void => {
-    setState({ hasError: false, errorMessage: '', consoleErrors: [] });
+  closeModal = (): void => {
+    this.setState({ hasError: false, errorMessage: '', consoleErrors: [] });
   };
 
-  if (state.hasError || state.consoleErrors.length > 0) {
+  render(): React.ReactNode {
+    const { hasError, errorMessage, consoleErrors } = this.state;
+
     return (
       <div>
-        <ErrorModal
-          errorMessage={state.errorMessage}
-          consoleErrors={state.consoleErrors}
-          onClose={closeModal}
-        />
-        {children}
+        {(hasError || consoleErrors.length > 0) && (
+          <ErrorModal
+            errorMessage={errorMessage}
+            consoleErrors={consoleErrors}
+            onClose={this.closeModal}
+          />
+        )}
+        {this.props.children}
       </div>
     );
   }
-
-  return <>{children}</>;
-};
+}
 
 export default ErrorBoundary;

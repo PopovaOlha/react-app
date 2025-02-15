@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import CardList from '../components/CardList/CardList';
 import '@testing-library/jest-dom';
 import { expect, test, vi } from 'vitest';
+import ThemeProvider from '../context/ThemeProvider';
 
 const mockCharacters = [
   {
@@ -39,11 +42,21 @@ const mockCharacters = [
 
 const mockOnCardClick = vi.fn();
 
+const mockStore = configureStore({
+  reducer: {
+    selectedItems: (state = { selectedCharacters: [] }) => state,
+  },
+});
+
 test('renders character list correctly', () => {
   render(
-    <BrowserRouter>
-      <CardList characters={mockCharacters} onCardClick={mockOnCardClick} />
-    </BrowserRouter>
+    <Provider store={mockStore}>
+      <BrowserRouter>
+        <ThemeProvider>
+          <CardList characters={mockCharacters} onCardClick={mockOnCardClick} />
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
   );
 
   expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
@@ -52,9 +65,13 @@ test('renders character list correctly', () => {
 
 test('displays "No characters found" when the list is empty', () => {
   render(
-    <BrowserRouter>
-      <CardList characters={[]} onCardClick={mockOnCardClick} />
-    </BrowserRouter>
+    <Provider store={mockStore}>
+      <BrowserRouter>
+        <ThemeProvider>
+          <CardList characters={[]} onCardClick={mockOnCardClick} />
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
   );
 
   expect(screen.getByText('No characters found')).toBeInTheDocument();
@@ -62,8 +79,12 @@ test('displays "No characters found" when the list is empty', () => {
 
 test('calls onCardClick when a card is clicked', () => {
   render(
-    <BrowserRouter>
-      <CardList characters={mockCharacters} onCardClick={mockOnCardClick} />
-    </BrowserRouter>
+    <Provider store={mockStore}>
+      <BrowserRouter>
+        <ThemeProvider>
+          <CardList characters={mockCharacters} onCardClick={mockOnCardClick} />
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
   );
 });

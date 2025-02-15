@@ -1,10 +1,8 @@
 import { Outlet, useSearchParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { fetchCharacters } from '../../api/starWarsApi';
+import { useSearchCharactersQuery } from '../../api/starWarsApi';
 import Search from '../../components/Search/Search';
 import CardList from '../../components/CardList/CardList';
 import Loader from '../../components/Loader/Loader';
-import { Character } from '../../interfaces/interfaces';
 import styles from './Main.module.css';
 import CharacterDetails from '../CharacterDetails/CharacterDetails';
 import Pagination from '../../components/Pagination/Pagination';
@@ -19,30 +17,14 @@ const Main: React.FC = () => {
 
   const searchTerm = searchParams.get('query') || '';
   const page = Number(searchParams.get('page')) || 1;
-
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [totalPages, setTotalPages] = useState(1);
   const selectedId = searchParams.get('details');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError('');
-      try {
-        const data = await fetchCharacters(searchTerm, page);
-        setCharacters(data);
-        setTotalPages(5);
-      } catch {
-        setError('Failed to load characters');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [searchTerm, page]);
+  // Используем RTK Query вместо useEffect
+  const {
+    data: characters = [],
+    isLoading,
+    error,
+  } = useSearchCharactersQuery({ searchTerm, page });
 
   return (
     <div className={styles.main}>
@@ -53,9 +35,11 @@ const Main: React.FC = () => {
         Star Wars Characters
       </h1>
       <Search onSearch={(query) => navigate(`/search?query=${query}&page=1`)} />
-      {loading && <Loader />}
-      {error && <p className={styles.error}>{error}</p>}
-      {!loading && !error && (
+
+      {isLoading && <Loader />}
+      {error && <p className={styles.error}>Failed to load characters</p>}
+
+      {!isLoading && !error && (
         <div className={styles.content}>
           <div className={styles.leftSection}>
             <CardList
@@ -73,7 +57,8 @@ const Main: React.FC = () => {
           )}
         </div>
       )}
-      <Pagination totalPages={totalPages} />
+
+      <Pagination totalPages={5} />
       <Footer />
     </div>
   );

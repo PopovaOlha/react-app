@@ -1,6 +1,6 @@
 .card {
   width: 150px;
-  height: 250px;
+  height: 270px;
   border: 2px solid #0ff;
   border-radius: 10px;
   padding: 20px;
@@ -13,6 +13,10 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+}
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 5px;
 }
 
 .dark {
