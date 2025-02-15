@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './MusicPlayer.module.css';
+import useTheme from '../../hooks/useTheme';
 
 const tracks = [
   "/music/Star Wars- The Imperial March (Darth Vader's Theme).mp3",
@@ -10,6 +11,7 @@ const tracks = [
 const getRandomTrackIndex = () => Math.floor(Math.random() * tracks.length);
 
 const MusicPlayer: React.FC = () => {
+  const { theme } = useTheme();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(
     localStorage.getItem('isPlaying') === 'true'
@@ -59,7 +61,9 @@ const MusicPlayer: React.FC = () => {
   }, [isPlaying, currentTrackIndex, volume]);
 
   return (
-    <div className={styles.musicPlayer}>
+    <div
+      className={`${styles.musicPlayer} ${theme === 'dark' ? styles.dark : styles.light}`}
+    >
       <button onClick={handlePlayPause} className={styles.playPauseButton}>
         <span className={styles.icon}>🎶</span>
         {isPlaying ? 'Pause' : 'Play'}

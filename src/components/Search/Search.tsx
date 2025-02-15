@@ -1,8 +1,10 @@
 import styles from './Search.module.css';
 import { SearchProps } from '../../interfaces/interfaces';
 import { useStoredSearchQuery } from '../../hooks/useStoredSearchQuery';
+import useTheme from '../../hooks/useTheme';
 
 const Search: React.FC<SearchProps> = ({ onSearch }) => {
+  const { theme } = useTheme();
   const [searchTerm, setSearchTerm] = useStoredSearchQuery();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +19,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   return (
     <div className={styles.searchContainer}>
       <input
-        className={styles.input}
+        className={`${styles.input} ${theme === 'dark' ? styles.dark : styles.light}`}
         type="text"
         value={searchTerm}
         onChange={handleInputChange}

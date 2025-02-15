@@ -4,12 +4,14 @@ import { fetchCharacterDetails } from '../../api/starWarsApi';
 import { Character, CharacterDetailsProps } from '../../interfaces/interfaces';
 import Loader from '../../components/Loader/Loader';
 import styles from './CharacterDetails.module.css';
+import useTheme from '../../hooks/useTheme';
 
 const CharacterDetails: React.FC<CharacterDetailsProps> = ({
   searchTerm,
   page,
 }) => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
   const [searchParams] = useSearchParams();
   const id = searchParams.get('details');
 
@@ -50,7 +52,9 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
   };
 
   return (
-    <div className={styles.details}>
+    <div
+      className={`${styles.details} ${theme === 'dark' ? styles.dark : styles.light}`}
+    >
       <button className={styles.closeButton} onClick={closeDetails}>
         ✖
       </button>

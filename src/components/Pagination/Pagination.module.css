@@ -6,6 +6,7 @@
   align-items: center;
   flex-wrap: wrap;
   margin-top: 20px;
+  margin-bottom: 7%;
 }
 
 .arrow {
@@ -46,6 +47,10 @@
   .pageInfo {
     font-size: 16px;
   }
+
+  .pagination {
+    margin-bottom: 10%;
+  }
 }
 
 @media (max-width: 767px) {
@@ -57,6 +62,10 @@
 
   .pageInfo {
     font-size: 17px;
+  }
+
+  .pagination {
+    margin-bottom: 15%;
   }
 }
 

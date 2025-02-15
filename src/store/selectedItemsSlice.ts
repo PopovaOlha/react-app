@@ -6,7 +6,7 @@ interface SelectedItemsState {
 }
 
 const initialState: SelectedItemsState = {
-  selectedCharacters: JSON.parse(localStorage.getItem('selectedItems') || '[]'), // Загрузка из localStorage
+  selectedCharacters: JSON.parse(localStorage.getItem('selectedItems') || '[]'),
 };
 
 const selectedItemsSlice = createSlice({

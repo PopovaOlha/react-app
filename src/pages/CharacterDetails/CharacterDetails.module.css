@@ -1,5 +1,4 @@
 .details {
-  background: rgba(0, 0, 0, 0.7);
   border: 2px solid #0ff;
   border-radius: 10px;
   padding: 20px;
@@ -22,6 +21,14 @@
 .details:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px #0ff;
+}
+
+.dark {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.light {
+  background: rgb(255, 255, 255, 0.7);
 }
 
 .closeButton {

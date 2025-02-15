@@ -1,7 +1,6 @@
 .card {
   width: 150px;
   height: 250px;
-  background: rgba(0, 0, 0, 0.7);
   border: 2px solid #0ff;
   border-radius: 10px;
   padding: 20px;
@@ -16,6 +15,14 @@
   overflow: hidden;
 }
 
+.dark {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.light {
+  background: rgb(255, 255, 255, 0.7);
+}
+
 .card:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15px #0ff;
@@ -24,6 +31,7 @@
 .image {
   border-radius: 10px;
   object-fit: cover;
+  border: 2px solid black;
 }
 
 .name {

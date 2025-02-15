@@ -1,19 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store'; // Make sure RootState is correctly imported
+import { RootState } from '../../store/store';
 import { unselectAll } from '../../store/selectedItemsSlice';
 import { useRef } from 'react';
 import styles from './Flyout.module.css';
+import useTheme from '../../hooks/useTheme';
 
 const Flyout: React.FC = () => {
+  const { theme } = useTheme();
   const dispatch = useDispatch();
-  // Extract selectedCharacters from Redux state
   const selectedCharacters = useSelector(
     (state: RootState) => state.selectedItems.selectedCharacters
   );
 
   const downloadLinkRef = useRef<HTMLAnchorElement | null>(null);
 
-  // If no items are selected, do not render Flyout
   if (selectedCharacters.length === 0) return null;
 
   const handleUnselectAll = () => {
@@ -61,7 +61,9 @@ const Flyout: React.FC = () => {
   };
 
   return (
-    <div className={styles.flyout}>
+    <div
+      className={`${styles.flyout} ${theme === 'dark' ? styles.dark : styles.light}`}
+    >
       <p>{selectedCharacters.length} items selected</p>
       <button className={styles.button} onClick={handleUnselectAll}>
         Unselect all

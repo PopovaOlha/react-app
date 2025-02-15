@@ -8,9 +8,11 @@ import {
 import { RootState } from '../../store/store';
 import styles from './Card.module.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import useTheme from '../../hooks/useTheme';
 
 const Card: React.FC<CardProps> = ({ character }) => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const selectedCharacters = useSelector(
@@ -21,7 +23,6 @@ const Card: React.FC<CardProps> = ({ character }) => {
   const page = searchParams.get('page') || '1';
 
   useEffect(() => {
-    // Restore selected items on reload
     const selected = JSON.parse(localStorage.getItem('selectedItems') || '[]');
     selected.forEach((char: Character) => {
       dispatch(selectCharacter(char));
@@ -49,7 +50,7 @@ const Card: React.FC<CardProps> = ({ character }) => {
 
   return (
     <div
-      className={`${styles.card} ${isSelected ? styles.selected : ''}`}
+      className={`${styles.card} ${isSelected ? styles.selected : ''} ${theme === 'dark' ? styles.dark : styles.light}`}
       onClick={handleClick}
     >
       <input

@@ -2,7 +2,6 @@
   position: fixed;
   bottom: 5px;
   right: 5px;
-  background: rgba(0, 0, 0, 0.9);
   padding: 10px 20px;
   border-radius: 5px;
   display: flex;
@@ -11,6 +10,14 @@
   gap: 10px;
   color: rgb(255, 162, 0);
   font-family: 'Star Jedi', sans-serif;
+}
+
+.dark {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.light {
+  background: rgb(255, 255, 255, 0.7);
 }
 
 .playPauseButton {
