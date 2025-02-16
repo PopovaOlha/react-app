@@ -19,7 +19,7 @@ export const charactersApi = createApi({
             id,
             name: char.name,
             description: char.birth_year || 'No description available',
-            image: `../../static/people/${id}.jpg`,
+            image: `/static/people/${id}.jpg`,
             character: char.name,
             films: char.films,
             eyeColor: char.eye_color,
