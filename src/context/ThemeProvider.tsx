@@ -10,7 +10,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     document.body.className = theme;
-    document.body.style.backgroundImage =
+    document.body.style.background =
       theme === 'dark'
         ? "url('../../public/images/48119f55fae4e21c.jpg')"
         : "url('../../public/images/enyorw152if51.jpg')";
