@@ -12,8 +12,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     document.body.className = theme;
     document.body.style.background =
       theme === 'dark'
-        ? "url('../../public/images/48119f55fae4e21c.jpg')"
-        : "url('../../public/images/enyorw152if51.jpg')";
+        ? "url('/images/48119f55fae4e21c.jpg')"
+        : "url('/images/enyorw152if51.jpg')";
     localStorage.setItem('theme', theme);
   }, [theme]);
 
