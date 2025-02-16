@@ -10,9 +10,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     document.body.className = theme;
-    document.body.style.background =
+    document.body.style.backgroundImage =
       theme === 'dark'
-        ? "url('/images/48119f55fae4e21c.jpg')"
+        ? "url('/images/evvjozguyaa1rqi.avif')"
         : "url('/images/enyorw152if51.jpg')";
     localStorage.setItem('theme', theme);
   }, [theme]);
