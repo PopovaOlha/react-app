@@ -6,6 +6,10 @@ const tracks = [
   "/music/Star Wars- The Imperial March (Darth Vader's Theme).mp3",
   '/music/03 Imperial Attack.mp3',
   '/music/08 The Battle Of Endor III.mp3',
+  '/music/01 Star Wars And The Revenge Of The Sith.mp3',
+  '/music/05 The Battle Of Endor I.mp3',
+  '/music/05 The Battle Of Hoth.mp3',
+  '/music/15 A New Hope And End Credits.mp3',
 ];
 
 const getRandomTrackIndex = () => Math.floor(Math.random() * tracks.length);
