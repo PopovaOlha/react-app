@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({ character }) => {
         alt={character.name}
       />
       <h3 className={styles.name}>{character.name}</h3>
-      <p className={styles.description}>{character.description}</p>
+      <p className={styles.description}>{character.birthYear}</p>
     </div>
   );
 };

@@ -11,7 +11,7 @@ export interface SearchState {
 export interface Character {
   id: string;
   name: string;
-  description: string;
+  birthYear: string;
   image: string;
   character: string;
   films: string[];

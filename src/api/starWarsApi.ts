@@ -20,7 +20,7 @@ export const fetchCharacters = async (
       return {
         id,
         name: char.name,
-        description: char.birth_year || 'No description available',
+        birthYear: char.birth_year || 'No description available',
         image: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`,
         character: char.name,
         films: char.films,
@@ -58,7 +58,7 @@ export const fetchCharacterDetails = async (id: string): Promise<Character> => {
     return {
       id,
       name: data.name,
-      description: data.birth_year || 'No description available',
+      birthYear: data.birth_year || 'No description available',
       image: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`,
       character: data.name,
       eyeColor: data.eye_color,

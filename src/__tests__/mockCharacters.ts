@@ -4,7 +4,7 @@ export const mockCharacters: Character[] = [
   {
     id: '1',
     name: 'Luke Skywalker',
-    description: 'A legendary Jedi Knight',
+    birthYear: 'A legendary Jedi Knight',
     image: 'https://via.placeholder.com/150',
     character: 'Hero',
     films: ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi'],
@@ -19,7 +19,7 @@ export const mockCharacters: Character[] = [
   {
     id: '2',
     name: 'Darth Vader',
-    description: 'A Sith Lord and former Jedi',
+    birthYear: 'A Sith Lord and former Jedi',
     image: 'https://via.placeholder.com/150',
     character: 'Villain',
     films: ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi'],
@@ -34,7 +34,7 @@ export const mockCharacters: Character[] = [
   {
     id: '3',
     name: 'Princess Leia',
-    description: 'A leader of the Rebel Alliance',
+    birthYear: 'A leader of the Rebel Alliance',
     image: 'https://via.placeholder.com/150',
     character: 'Hero',
     films: ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi'],

@@ -10,7 +10,7 @@ const mockCharacters = [
   {
     id: '1',
     name: 'Luke Skywalker',
-    description: 'A legendary Jedi Knight',
+    birthYear: 'A legendary Jedi Knight',
     image: 'https://via.placeholder.com/150',
     films: ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi'],
     eyeColor: 'blue',
@@ -25,7 +25,7 @@ const mockCharacters = [
   {
     id: '2',
     name: 'Darth Vader',
-    description: 'A powerful Sith Lord',
+    birthYear: 'A powerful Sith Lord',
     image: 'https://via.placeholder.com/150',
     films: ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi'],
     eyeColor: 'red',
