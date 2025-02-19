@@ -41,12 +41,16 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
 
     fetchData();
   }, [id]);
+
   if (loading) return <Loader />;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
   if (!characterDetails) return <p>No details available for this character.</p>;
 
   const closeDetails = () => {
-    navigate(`/?query=${searchTerm}&page=${page}`);
+    navigate({
+      pathname: '/',
+      search: `?query=${searchTerm}&page=${page}`,
+    });
   };
 
   return (
@@ -69,7 +73,6 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
       <p>
         <strong>HomeWorld:</strong> {characterDetails.homeworld}
       </p>
-      <div></div>
     </div>
   );
 };
