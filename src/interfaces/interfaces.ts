@@ -58,6 +58,10 @@ export interface MusicPlayerState {
   currentTrackIndex: number;
 }
 
+export interface ErrorComponentProps {
+  message: string;
+}
+
 export interface State {
   hasError: boolean;
 }
@@ -115,4 +119,8 @@ export interface SelectedItemsState {
 export interface RootState {
   selectedItems: SelectedItemsState;
   characters: Character[];
+}
+
+export interface UiState {
+  isLoading: boolean;
 }

@@ -1,6 +1,7 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useGetCharacterDetailsQuery } from '../../api/starWarsApi';
 import Loader from '../../components/Loader/Loader';
+import ErrorComponent from '../../components/ErrorComponent/ErrorComponent';
 import styles from './CharacterDetails.module.css';
 import useTheme from '../../hooks/useTheme';
 
@@ -21,12 +22,21 @@ const CharacterDetails: React.FC<{ searchTerm: string; page: number }> = ({
     skip: !id,
   });
 
-  if (!id)
-    return <p style={{ color: 'red' }}>Character ID is missing in the URL.</p>;
+  if (!id) {
+    return <ErrorComponent message="Character ID is missing in the URL." />;
+  }
+
   if (isLoading) return <Loader />;
-  if (error)
-    return <p style={{ color: 'red' }}>Failed to load character details.</p>;
-  if (!characterDetails) return <p>No details available for this character.</p>;
+
+  if (error) {
+    return <ErrorComponent message="Failed to load character details." />;
+  }
+
+  if (!characterDetails) {
+    return (
+      <ErrorComponent message="No details available for this character." />
+    );
+  }
 
   const closeDetails = () => {
     navigate(`/?query=${searchTerm}&page=${page}`);

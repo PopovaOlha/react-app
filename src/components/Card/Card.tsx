@@ -6,21 +6,32 @@ import {
   unselectCharacter,
 } from '../../store/selectedItemsSlice';
 import { RootState } from '../../store/store';
+import { useSearchCharactersQuery } from '../../api/starWarsApi';
+import { setLoading } from '../../store/uiSlice';
 import styles from './Card.module.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import useTheme from '../../hooks/useTheme';
+import Loading from '../Loader/Loader';
 
 const Card: React.FC<CardProps> = ({ character }) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
+
   const selectedCharacters = useSelector(
     (state: RootState) => state.selectedItems.selectedCharacters
   );
 
+  const isLoading = useSelector((state: RootState) => state.ui.isLoading);
+
   const searchTerm = searchParams.get('query') || '';
   const page = searchParams.get('page') || '1';
+
+  const { error, isFetching } = useSearchCharactersQuery({
+    searchTerm,
+    page: parseInt(page),
+  });
 
   useEffect(() => {
     const selected = JSON.parse(localStorage.getItem('selectedItems') || '[]');
@@ -28,6 +39,10 @@ const Card: React.FC<CardProps> = ({ character }) => {
       dispatch(selectCharacter(char));
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(setLoading(isFetching));
+  }, [isFetching, dispatch]);
 
   const handleClick = (e: React.MouseEvent) => {
     if (!(e.target as HTMLElement).closest('input[type="checkbox"]')) {
@@ -44,9 +59,17 @@ const Card: React.FC<CardProps> = ({ character }) => {
     if (event.target.checked) {
       dispatch(selectCharacter(character));
     } else {
-      dispatch(unselectCharacter(Number(character.id)));
+      dispatch(unselectCharacter(String(character.id)));
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <div>Error: {'status' in error ? error.status : error.message}</div>;
+  }
 
   return (
     <div

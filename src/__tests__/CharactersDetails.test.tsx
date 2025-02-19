@@ -4,7 +4,7 @@ import { MemoryRouter, useNavigate, useSearchParams } from 'react-router-dom';
 import { vi, Mock } from 'vitest';
 import CharacterDetails from '../pages/CharacterDetails/CharacterDetails';
 import { ThemeProvider } from '../context/ThemeProvider';
-import { store } from '../store/store';
+import store from '../store/store';
 
 vi.mock('../../api/starWarsApi', () => ({
   fetchCharacterDetails: vi.fn(),

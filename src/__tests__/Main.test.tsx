@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import Main from '../pages/Main/Main';
 import { Mock, vi } from 'vitest';
 import ThemeProvider from '../context/ThemeProvider';
-import { store } from '../store/store';
+import store from '../store/store';
 
 vi.mock('../../api/starWarsApi', () => ({
   fetchCharacters: vi.fn(),

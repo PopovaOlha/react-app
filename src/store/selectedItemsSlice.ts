@@ -6,7 +6,7 @@ interface SelectedItemsState {
 }
 
 const initialState: SelectedItemsState = {
-  selectedCharacters: JSON.parse(localStorage.getItem('selectedItems') || '[]'),
+  selectedCharacters: [],
 };
 
 const selectedItemsSlice = createSlice({
@@ -19,27 +19,25 @@ const selectedItemsSlice = createSlice({
       ) {
         state.selectedCharacters.push(action.payload);
       }
-      localStorage.setItem(
-        'selectedItems',
-        JSON.stringify(state.selectedCharacters)
-      );
     },
-    unselectCharacter: (state, action: PayloadAction<number>) => {
+    unselectCharacter: (state, action: PayloadAction<string>) => {
       state.selectedCharacters = state.selectedCharacters.filter(
-        (char) => char.id !== String(action.payload)
-      );
-      localStorage.setItem(
-        'selectedItems',
-        JSON.stringify(state.selectedCharacters)
+        (char) => char.id !== action.payload
       );
     },
     unselectAll: (state) => {
       state.selectedCharacters = [];
-      localStorage.removeItem('selectedItems');
+    },
+    setCharacters: (state, action: PayloadAction<Character[]>) => {
+      state.selectedCharacters = action.payload;
     },
   },
 });
 
-export const { selectCharacter, unselectCharacter, unselectAll } =
-  selectedItemsSlice.actions;
+export const {
+  selectCharacter,
+  unselectCharacter,
+  unselectAll,
+  setCharacters,
+} = selectedItemsSlice.actions;
 export default selectedItemsSlice.reducer;

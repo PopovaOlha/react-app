@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import selectedItemsReducer from './selectedItemsSlice';
-import charactersReducer from './charactersSlice';
+import uiReducer from './uiSlice';
 import { charactersApi } from '../api/starWarsApi';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     selectedItems: selectedItemsReducer,
-    characters: charactersReducer,
+    ui: uiReducer,
     [charactersApi.reducerPath]: charactersApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -15,3 +15,5 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export default store;

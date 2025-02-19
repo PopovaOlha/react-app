@@ -19,7 +19,6 @@ const Main: React.FC = () => {
   const page = Number(searchParams.get('page')) || 1;
   const selectedId = searchParams.get('details');
 
-  // Используем RTK Query вместо useEffect
   const {
     data: characters = [],
     isLoading,
@@ -27,13 +26,11 @@ const Main: React.FC = () => {
   } = useSearchCharactersQuery({ searchTerm, page });
 
   return (
-    <div className={styles.main}>
+    <div
+      className={`${styles.main} ${theme === 'dark' ? styles.dark : styles.light}`}
+    >
       <ThemeToggle />
-      <h1
-        className={`${styles.title} ${theme === 'dark' ? styles.dark : styles.light}`}
-      >
-        Star Wars Characters
-      </h1>
+      <h1 className={styles.title}>Star Wars Characters</h1>
       <Search onSearch={(query) => navigate(`/search?query=${query}&page=1`)} />
 
       {isLoading && <Loader />}
@@ -57,7 +54,6 @@ const Main: React.FC = () => {
           )}
         </div>
       )}
-
       <Pagination totalPages={5} />
       <Footer />
     </div>

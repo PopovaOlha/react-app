@@ -3,7 +3,7 @@ import App from '../components/App/App';
 import { vi } from 'vitest';
 import ThemeProvider from '../context/ThemeProvider';
 import { Provider } from 'react-redux';
-import { store } from '../store/store';
+import store from '../store/store';
 
 vi.mock('../../pages/Main/Main', () => ({
   default: () => <div>Main Page</div>,

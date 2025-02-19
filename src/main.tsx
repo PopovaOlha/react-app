@@ -4,8 +4,9 @@ import './index.css';
 import App from './components/App/App.tsx';
 import MusicPlayer from './components/MusicPlayer/MusicPlayer.tsx';
 import { Provider } from 'react-redux';
-import { store } from './store/store.ts';
+
 import ThemeProvider from './context/ThemeProvider.tsx';
+import store from './store/store.ts';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 createRoot(document.getElementById('root')!).render(

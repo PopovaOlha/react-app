@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'; // Import the Provider
 import CardList from '../components/CardList/CardList';
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
-import { store } from '../store/store';
 import ThemeProvider from '../context/ThemeProvider';
+import store from '../store/store';
 
 const mockOnCardClick = vi.fn();
 
