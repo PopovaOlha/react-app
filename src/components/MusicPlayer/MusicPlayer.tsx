@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './MusicPlayer.module.css';
+import { DEFAULT_VOLUME } from '../../config/constants';
 
 const tracks = [
   "/music/Star Wars- The Imperial March (Darth Vader's Theme).mp3",
@@ -12,10 +13,10 @@ const getRandomTrackIndex = () => Math.floor(Math.random() * tracks.length);
 const MusicPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(
-    localStorage.getItem('isPlaying') === 'true'
+    () => localStorage.getItem('isPlaying') === 'true'
   );
-  const [volume, setVolume] = useState(
-    parseFloat(localStorage.getItem('volume') || '0.5')
+  const [volume, setVolume] = useState(() =>
+    parseFloat(localStorage.getItem('volume') || String(DEFAULT_VOLUME))
   );
   const [currentTrackIndex, setCurrentTrackIndex] =
     useState(getRandomTrackIndex);
@@ -27,7 +28,7 @@ const MusicPlayer: React.FC = () => {
       audioRef.current
         .play()
         .then(() => setIsPlaying(true))
-        .catch((err) => console.error('Playback error:', err));
+        .catch(console.error);
     } else {
       audioRef.current.pause();
       setIsPlaying(false);
