@@ -12,10 +12,10 @@ export default tseslint.config(
   {
     extends: [
       js.configs.recommended,
-      ...tseslint.configs.strict,
+      tseslint.configs.strict,
       eslintPluginPrettier,
     ],
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -35,6 +35,14 @@ export default tseslint.config(
       'react-compiler/react-compiler': 'error',
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
+      'prettier/prettier': 'error',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/explicit-module-boundary-types': 'warn', // ⚠️
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
+      'react/prop-types': 'off',
     },
     settings: {
       react: {
