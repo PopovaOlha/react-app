@@ -41,6 +41,30 @@ const Main: React.FC = () => {
     fetchData();
   }, [searchTerm, page]);
 
+  const renderContent = () => {
+    if (loading) return <Loader />;
+    if (error) return <p className={styles.error}>{error}</p>;
+
+    return (
+      <div className={styles.content}>
+        <div className={styles.leftSection}>
+          <CardList
+            characters={characters}
+            onCardClick={(id) =>
+              navigate(`/?query=${searchTerm}&page=${page}&details=${id}`)
+            }
+          />
+        </div>
+        {selectedId && (
+          <div className={styles.rightSection}>
+            <Outlet />
+            <CharacterDetails searchTerm={searchTerm} page={page} />
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -48,26 +72,7 @@ const Main: React.FC = () => {
         <Search
           onSearch={(query) => navigate(`/search?query=${query}&page=1`)}
         />
-        {loading && <Loader />}
-        {error && <p className={styles.error}>{error}</p>}
-        {!loading && !error && (
-          <div className={styles.content}>
-            <div className={styles.leftSection}>
-              <CardList
-                characters={characters}
-                onCardClick={(id) =>
-                  navigate(`/?query=${searchTerm}&page=${page}&details=${id}`)
-                }
-              />
-            </div>
-            {selectedId && (
-              <div className={styles.rightSection}>
-                <Outlet />
-                <CharacterDetails searchTerm={searchTerm} page={page} />
-              </div>
-            )}
-          </div>
-        )}
+        {renderContent()}
         <Pagination totalPages={totalPages} />
       </div>
       <Footer />

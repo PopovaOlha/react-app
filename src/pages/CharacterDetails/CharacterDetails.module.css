@@ -65,3 +65,8 @@
   object-fit: cover;
   margin-top: 15px;
 }
+.error {
+  color: red;
+  font-size: 16px;
+  text-align: center;
+}

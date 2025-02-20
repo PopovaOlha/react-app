@@ -43,7 +43,7 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
   }, [id]);
 
   if (loading) return <Loader />;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
   if (!characterDetails) return <p>No details available for this character.</p>;
 
   const closeDetails = () => {
