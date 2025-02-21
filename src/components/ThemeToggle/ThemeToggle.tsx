@@ -10,6 +10,7 @@ const ThemeToggle: React.FC = () => {
       <span className={styles.toggleLabel}>Light</span>
       <div
         className={`${styles.toggleSwitch} ${theme === 'dark' ? styles.active : ''}`}
+        role="button"
         onClick={toggleTheme}
       />
       <span className={styles.toggleLabel}>Dark</span>

@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'; // Import the Provider
 import CardList from '../components/CardList/CardList';
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 import ThemeProvider from '../context/ThemeProvider';
-import store from '../store/store';
+import { mockStore } from '../mocks/mockStore';
 
 const mockOnCardClick = vi.fn();
 
@@ -44,7 +44,7 @@ const mockCharacters = [
 
 test('renders character list correctly', async () => {
   render(
-    <Provider store={store}>
+    <Provider store={mockStore}>
       <ThemeProvider>
         <BrowserRouter>
           <CardList characters={mockCharacters} onCardClick={mockOnCardClick} />
@@ -53,14 +53,16 @@ test('renders character list correctly', async () => {
     </Provider>
   );
 
-  const lukeSkywalker = await screen.findByText(/Luke Skywalker/i);
-  const darthVader = await screen.findByText(/Darth Vader/i);
-  expect(lukeSkywalker).toBeInTheDocument();
-  expect(darthVader).toBeInTheDocument();
+  // Wait for the characters to be rendered
+  await waitFor(() => {
+    expect(screen.getByText(/Luke Skywalker/i)).toBeInTheDocument();
+    expect(screen.getByText(/Darth Vader/i)).toBeInTheDocument();
+  });
 });
+
 test('displays "No characters found" when the list is empty', () => {
   render(
-    <Provider store={store}>
+    <Provider store={mockStore}>
       <ThemeProvider>
         <BrowserRouter>
           <CardList characters={[]} onCardClick={mockOnCardClick} />
@@ -74,7 +76,7 @@ test('displays "No characters found" when the list is empty', () => {
 
 test('calls onCardClick when a card is clicked', () => {
   render(
-    <Provider store={store}>
+    <Provider store={mockStore}>
       <ThemeProvider>
         <BrowserRouter>
           <CardList characters={mockCharacters} onCardClick={mockOnCardClick} />
