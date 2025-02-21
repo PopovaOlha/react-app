@@ -31,7 +31,7 @@ const Flyout: React.FC = () => {
             [
               character.id,
               character.name,
-              character.description ?? 'N/A',
+              character.birthYear ?? 'N/A',
               character.gender ?? 'Unknown',
               character.height ?? 'Unknown',
               character.eyeColor ?? 'Nnknown',

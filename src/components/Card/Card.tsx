@@ -10,8 +10,8 @@ import { useSearchCharactersQuery } from '../../api/starWarsApi';
 import { setLoading } from '../../store/uiSlice';
 import styles from './Card.module.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import useTheme from '../../hooks/useTheme';
 import Loading from '../Loader/Loader';
+import useTheme from '../../hooks/useTheme';
 
 const Card: React.FC<CardProps> = ({ character }) => {
   const navigate = useNavigate();
@@ -73,22 +73,25 @@ const Card: React.FC<CardProps> = ({ character }) => {
 
   return (
     <div
-      className={`${styles.card} ${isSelected ? styles.selected : ''} ${theme === 'dark' ? styles.dark : styles.light}`}
+      className={`${styles.card} ${isSelected ? styles.selected : ''} ${theme === 'dark' ? styles.dark : styles.light} `}
+      data-testid="character-card"
       onClick={handleClick}
     >
-      <input
-        type="checkbox"
-        className={styles.checkbox}
-        checked={isSelected}
-        onChange={handleCheckboxChange}
-      />
-      <img
-        className={styles.image}
-        src={character.image}
-        alt={character.name}
-      />
-      <h3 className={styles.name}>{character.name}</h3>
-      <p className={styles.description}>{character.description}</p>
+      <>
+        <input
+          type="checkbox"
+          className={styles.checkbox}
+          checked={isSelected}
+          onChange={handleCheckboxChange}
+        />
+        <img
+          className={styles.image}
+          src={character.image}
+          alt={character.name}
+        />
+        <h3 className={styles.name}>{character.name}</h3>
+        <p className={styles.description}>{character.birthYear}</p>
+      </>
     </div>
   );
 };

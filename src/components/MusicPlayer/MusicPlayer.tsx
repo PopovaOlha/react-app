@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './MusicPlayer.module.css';
+import { DEFAULT_VOLUME } from '../../config/constants';
 
 const tracks = [
   "/music/Star Wars- The Imperial March (Darth Vader's Theme).mp3",
@@ -12,11 +13,12 @@ const getRandomTrackIndex = () => Math.floor(Math.random() * tracks.length);
 const MusicPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(
-    localStorage.getItem('isPlaying') === 'true'
+    () => localStorage.getItem('isPlaying') === 'true'
   );
-  const [volume, setVolume] = useState(
-    parseFloat(localStorage.getItem('volume') || '0.5')
+  const [volume, setVolume] = useState(() =>
+    parseFloat(localStorage.getItem('volume') || DEFAULT_VOLUME)
   );
+
   const [currentTrackIndex, setCurrentTrackIndex] =
     useState(getRandomTrackIndex);
 
@@ -27,7 +29,7 @@ const MusicPlayer: React.FC = () => {
       audioRef.current
         .play()
         .then(() => setIsPlaying(true))
-        .catch((err) => console.error('Playback error:', err));
+        .catch(console.error);
     } else {
       audioRef.current.pause();
       setIsPlaying(false);
@@ -35,8 +37,7 @@ const MusicPlayer: React.FC = () => {
   };
 
   const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(event.target.value);
-    setVolume(newVolume);
+    setVolume(event.target.valueAsNumber);
   };
 
   const handleTrackEnd = () => {
@@ -52,11 +53,21 @@ const MusicPlayer: React.FC = () => {
     if (!audioRef.current) return;
 
     audioRef.current.volume = volume;
+  }, [volume]);
+
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    audioRef.current.src = tracks[currentTrackIndex];
+    audioRef.current.load();
 
     if (isPlaying) {
-      audioRef.current.play().catch(() => setIsPlaying(false));
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false));
     }
-  }, [isPlaying, currentTrackIndex, volume]);
+  }, [currentTrackIndex, isPlaying]);
 
   return (
     <div className={styles.musicPlayer}>
@@ -75,10 +86,7 @@ const MusicPlayer: React.FC = () => {
         className={styles.volumeSlider}
       />
 
-      <audio ref={audioRef} onEnded={handleTrackEnd}>
-        <source src={tracks[currentTrackIndex]} type="audio/mp3" />
-        Your browser does not support the audio element.
-      </audio>
+      <audio ref={audioRef} onEnded={handleTrackEnd} />
     </div>
   );
 };

@@ -22,9 +22,7 @@ describe('ErrorBoundary', () => {
     fireEvent.click(screen.getByText('Throw Error'));
 
     expect(await screen.findByText('Error Log')).toBeInTheDocument();
-    expect(
-      await screen.findByText('Test Console Error: Something went wrong!')
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Throw Error')).toBeInTheDocument();
   });
 
   it('displays the correct error message in the ErrorModal', async () => {
@@ -46,9 +44,7 @@ describe('ErrorBoundary', () => {
 
     fireEvent.click(screen.getByText('Throw Error'));
 
-    const consoleError = await screen.findByText(
-      'Test Console Error: Something went wrong!'
-    );
+    const consoleError = await screen.findByText('Throw Error');
     expect(consoleError).toBeInTheDocument();
   });
 

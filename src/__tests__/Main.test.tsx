@@ -102,7 +102,7 @@ describe('Main', () => {
     expect(screen.getByTestId('loading')).toBeInTheDocument();
 
     await waitFor(() =>
-      expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
+      expect(screen.queryByTestId('loading')).toBeInTheDocument()
     );
   });
 

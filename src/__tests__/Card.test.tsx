@@ -13,7 +13,7 @@ const mockCharacters = [
   {
     id: '1',
     name: 'Luke Skywalker',
-    description: 'A legendary Jedi Knight',
+    birthYear: 'A legendary Jedi Knight',
     image: 'https://via.placeholder.com/150',
     films: ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi'],
     eyeColor: 'blue',
@@ -28,7 +28,7 @@ const mockCharacters = [
   {
     id: '2',
     name: 'Darth Vader',
-    description: 'A powerful Sith Lord',
+    birthYear: 'A powerful Sith Lord',
     image: 'https://via.placeholder.com/150',
     films: ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi'],
     eyeColor: 'red',
@@ -42,7 +42,7 @@ const mockCharacters = [
   },
 ];
 
-test('renders character list correctly', () => {
+test('renders character list correctly', async () => {
   render(
     <Provider store={store}>
       <ThemeProvider>
@@ -53,10 +53,11 @@ test('renders character list correctly', () => {
     </Provider>
   );
 
-  expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
-  expect(screen.getByText('Darth Vader')).toBeInTheDocument();
+  const lukeSkywalker = await screen.findByText(/Luke Skywalker/i);
+  const darthVader = await screen.findByText(/Darth Vader/i);
+  expect(lukeSkywalker).toBeInTheDocument();
+  expect(darthVader).toBeInTheDocument();
 });
-
 test('displays "No characters found" when the list is empty', () => {
   render(
     <Provider store={store}>

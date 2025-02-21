@@ -18,7 +18,7 @@ export const charactersApi = createApi({
           return {
             id,
             name: char.name,
-            description: char.birth_year || 'No description available',
+            birthYear: char.birth_year || 'No description available',
             image: `/static/people/${id}.jpg`,
             character: char.name,
             films: char.films,
@@ -37,7 +37,7 @@ export const charactersApi = createApi({
       transformResponse: (data: APICharacter) => ({
         id: data.url.match(/\/people\/(\d+)\//)?.[1] || 'placeholder',
         name: data.name,
-        description: data.birth_year || 'No description available',
+        birthYear: data.birth_year || 'No description available',
         image: `../../static/people/${data.url.match(/\/people\/(\d+)\//)?.[1]}.jpg`,
         character: data.name,
         eyeColor: data.eye_color,

@@ -8,10 +8,12 @@ const Pagination: React.FC<{ totalPages: number }> = ({ totalPages }) => {
   const selectedId = searchParams.get('details') || '';
 
   const updatePage = (newPage: number) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('page', newPage.toString());
-    if (searchTerm) newParams.set('query', searchTerm);
-    if (selectedId) newParams.set('details', selectedId);
+    const newParams = new URLSearchParams({
+      page: newPage.toString(),
+      ...(searchTerm && { query: searchTerm }),
+      ...(selectedId && { details: selectedId }),
+    });
+
     setSearchParams(newParams);
   };
 

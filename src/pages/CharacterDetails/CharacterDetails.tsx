@@ -50,7 +50,7 @@ const CharacterDetails: React.FC<{ searchTerm: string; page: number }> = ({
         ✖
       </button>
       <h2>{characterDetails.name}</h2>
-      <p>{characterDetails.description}</p>
+      <p>{characterDetails.birthYear}</p>
       <img src={characterDetails.image} alt={characterDetails.name} />
       <p>
         <strong>Gender:</strong> {characterDetails.gender}

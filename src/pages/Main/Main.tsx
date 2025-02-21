@@ -25,36 +25,40 @@ const Main: React.FC = () => {
     error,
   } = useSearchCharactersQuery({ searchTerm, page });
 
-  return (
-    <div
-      className={`${styles.main} ${theme === 'dark' ? styles.dark : styles.light}`}
-    >
-      <ThemeToggle />
-      <h1 className={styles.title}>Star Wars Characters</h1>
-      <Search onSearch={(query) => navigate(`/search?query=${query}&page=1`)} />
-
-      {isLoading && <Loader />}
-      {error && <p className={styles.error}>Failed to load characters</p>}
-
-      {!isLoading && !error && (
-        <div className={styles.content}>
-          <div className={styles.leftSection}>
-            <CardList
-              characters={characters}
-              onCardClick={(id) =>
-                navigate(`/?query=${searchTerm}&page=${page}&details=${id}`)
-              }
-            />
-          </div>
-          {selectedId && (
-            <div className={styles.rightSection}>
-              <Outlet />
-              <CharacterDetails searchTerm={searchTerm} page={page} />
-            </div>
-          )}
+  const renderContent = () =>
+    !isLoading &&
+    !error && (
+      <div className={styles.content}>
+        <div className={styles.leftSection}>
+          <CardList
+            characters={characters}
+            onCardClick={(id) =>
+              navigate(`/?query=${searchTerm}&page=${page}&details=${id}`)
+            }
+          />
         </div>
-      )}
-      <Pagination totalPages={5} />
+        {selectedId && (
+          <div className={styles.rightSection}>
+            <Outlet />
+            <CharacterDetails searchTerm={searchTerm} page={page} />
+          </div>
+        )}
+      </div>
+    );
+
+  return (
+    <div className={styles.container}>
+      <div
+        className={`${styles.main} ${theme === 'dark' ? styles.dark : styles.light}`}
+      >
+        <ThemeToggle />
+        <h1 className={styles.title}>Star Wars Characters</h1>
+        <Search onSearch={(query) => navigate(`/?query=${query}&page=1`)} />
+        {isLoading && <Loader />}
+        {error && <p className={styles.error}>Failed to load characters</p>}
+        {renderContent()}
+        <Pagination totalPages={5} />
+      </div>
       <Footer />
     </div>
   );

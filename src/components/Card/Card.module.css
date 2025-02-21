@@ -1,6 +1,7 @@
 .card {
   width: 150px;
-  height: 270px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.7);
   border: 2px solid #0ff;
   border-radius: 10px;
   padding: 20px;
@@ -14,18 +15,6 @@
   justify-content: space-between;
   overflow: hidden;
 }
-.checkbox {
-  margin-top: -10px;
-  margin-bottom: 5px;
-}
-
-.dark {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.light {
-  background: rgb(255, 255, 255, 0.7);
-}
 
 .card:hover {
   transform: scale(1.05);
@@ -35,7 +24,6 @@
 .image {
   border-radius: 10px;
   object-fit: cover;
-  border: 2px solid black;
 }
 
 .name {
@@ -60,15 +48,17 @@
   justify-content: center;
 }
 
+.dark {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.light {
+  background: rgb(255, 255, 255, 0.7);
+}
+
 .cardList .card {
   flex: 1 1 calc(33.33% - 20px);
   margin-bottom: 20px;
-}
-
-@media (max-width: 1024px) {
-  .cardList .card {
-    flex: 1 1 calc(33.33% - 20px);
-  }
 }
 
 @media (max-width: 768px) {
