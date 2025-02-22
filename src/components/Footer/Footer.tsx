@@ -3,7 +3,6 @@ import logo from '../../assets/rss-logo.c19ce1b4.svg';
 import ThrowErrorButton from '../ThrowErrorButto/ThrowErrorButton';
 import { LOGO_HEIGHT, LOGO_WIDTH } from '../../config/constants';
 import useTheme from '../../hooks/useTheme';
-
 const Footer: React.FC = () => {
   const { theme } = useTheme();
 

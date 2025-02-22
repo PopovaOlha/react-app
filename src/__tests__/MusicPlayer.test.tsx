@@ -2,12 +2,15 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import MusicPlayer from '../components/MusicPlayer/MusicPlayer';
 import { vi } from 'vitest';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
+import { mockStore } from '../mocks/mockStore';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import ThemeProvider from '../context/ThemeProvider';
 
-// Mock MusicPlayer's error modal
 vi.mock('../components/MusicPlayer/MusicPlayer.tsx', () => ({
   default: ({
     errorMessage,
-    consoleErrors = [], // Ensure this is always an array
+    consoleErrors = [],
     onClose,
   }: {
     errorMessage: string;
@@ -26,7 +29,6 @@ vi.mock('../components/MusicPlayer/MusicPlayer.tsx', () => ({
   ),
 }));
 
-// Mock localStorage functions
 beforeAll(() => {
   vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {});
   vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => null);
@@ -52,18 +54,23 @@ describe('ErrorBoundary and MusicPlayer', () => {
   });
 
   it('should toggle play/pause when the button is clicked', async () => {
-    render(<MusicPlayer />);
+    render(
+      <Provider store={mockStore}>
+        <ThemeProvider>
+          <BrowserRouter>
+            <MusicPlayer />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    );
 
     const playPauseButton = screen.getByRole('button');
 
-    // Check initial play state
     expect(playPauseButton).toHaveRole('button');
 
-    // Simulate play action
     fireEvent.click(playPauseButton);
     expect(playPauseButton).toHaveRole('button');
 
-    // Simulate pause action
     fireEvent.click(playPauseButton);
     expect(playPauseButton).toHaveRole('button');
   });

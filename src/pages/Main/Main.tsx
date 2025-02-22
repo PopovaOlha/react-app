@@ -9,6 +9,7 @@ import Pagination from '../../components/Pagination/Pagination';
 import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
 import Footer from '../../components/Footer/Footer';
 import useTheme from '../../hooks/useTheme';
+import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
 
 const Main: React.FC = () => {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ const Main: React.FC = () => {
         {error && <p className={styles.error}>Failed to load characters</p>}
         {renderContent()}
         <Pagination totalPages={5} />
+        <MusicPlayer />
       </div>
       <Footer />
     </div>
