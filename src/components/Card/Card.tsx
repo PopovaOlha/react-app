@@ -13,6 +13,8 @@ import styles from './Card.module.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Loading from '../Loader/Loader';
 import useTheme from '../../hooks/useTheme';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
 const Card: React.FC<CardProps> = ({ character }) => {
   const navigate = useNavigate();
@@ -69,9 +71,14 @@ const Card: React.FC<CardProps> = ({ character }) => {
   if (isLoading) {
     return <Loading />;
   }
-
   if (error) {
-    return <div>Error: {'status' in error ? error.status : error.message}</div>;
+    return (
+      <div>
+        Error:
+        {(error as FetchBaseQueryError).status ??
+          (error as SerializedError).message}
+      </div>
+    );
   }
 
   return (
