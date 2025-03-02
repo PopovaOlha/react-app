@@ -4,6 +4,7 @@ import Loader from '../../components/Loader/Loader';
 import ErrorComponent from '../../components/ErrorComponent/ErrorComponent';
 import styles from './CharacterDetails.module.css';
 import useTheme from '../../hooks/useTheme';
+import { DARK_THEME } from '../../config/constants';
 
 const CharacterDetails: React.FC = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const CharacterDetails: React.FC = () => {
 
   return (
     <div
-      className={`${styles.details} ${theme === 'dark' ? styles.dark : styles.light}`}
+      className={`${styles.details} ${theme === DARK_THEME ? styles.dark : styles.light}`}
     >
       <button className={styles.closeButton} onClick={closeDetails}>
         ✖

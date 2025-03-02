@@ -15,6 +15,7 @@ import Loading from '../Loader/Loader';
 import useTheme from '../../hooks/useTheme';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { DARK_THEME } from '../../config/constants';
 
 const Card: React.FC<CardProps> = ({ character }) => {
   const navigate = useNavigate();
@@ -84,7 +85,7 @@ const Card: React.FC<CardProps> = ({ character }) => {
   return (
     <div
       className={`${styles.card} ${isSelected ? styles.selected : ''} ${
-        theme === 'dark' ? styles.dark : styles.light
+        theme === DARK_THEME ? styles.dark : styles.light
       }`}
       data-testid="character-card"
       onClick={handleClick}

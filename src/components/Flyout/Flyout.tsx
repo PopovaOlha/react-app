@@ -4,6 +4,7 @@ import { unselectAll } from '../../store/selectedItemsSlice';
 import { useRef } from 'react';
 import styles from './Flyout.module.css';
 import useTheme from '../../hooks/useTheme';
+import { DARK_THEME } from '../../config/constants';
 
 const Flyout: React.FC = () => {
   const { theme } = useTheme();
@@ -21,25 +22,36 @@ const Flyout: React.FC = () => {
   };
 
   const handleDownload = () => {
-    const headers = ['ID', 'Name', 'Description', 'Age', 'Gender', 'Height'];
+    if (!selectedCharacters.length) {
+      console.warn('No characters selected for download.');
+      return;
+    }
 
-    const csvContent =
-      'data:text/csv;charset=utf-8,' +
-      [headers.join(',')]
-        .concat(
-          selectedCharacters.map((character) =>
-            [
-              character.id,
-              character.name,
-              character.birthYear ?? 'N/A',
-              character.gender ?? 'Unknown',
-              character.height ?? 'Unknown',
-              character.eyeColor ?? 'Nnknown',
-            ].join(',')
-          )
-        )
-        .join('\n');
+    const headers = [
+      'ID',
+      'Name',
+      'Birth Year',
+      'Gender',
+      'Height',
+      'Eye Color',
+    ];
+    const csvRows = selectedCharacters.map(
+      ({ id, name, birthYear, gender, height, eyeColor }) =>
+        [
+          id,
+          name,
+          birthYear ?? 'N/A',
+          gender ?? 'Unknown',
+          height ?? 'Unknown',
+          eyeColor ?? 'Unknown',
+        ].join(',')
+    );
 
+    const csvContent = [
+      'data:text/csv;charset=utf-8,',
+      headers.join(','),
+      ...csvRows,
+    ].join('\n');
     const encodedUri = encodeURI(csvContent);
 
     if (downloadLinkRef.current) {
@@ -54,7 +66,7 @@ const Flyout: React.FC = () => {
 
   return (
     <div
-      className={`${styles.flyout} ${theme === 'dark' ? styles.dark : styles.light}`}
+      className={`${styles.flyout} ${theme === DARK_THEME ? styles.dark : styles.light}`}
     >
       <p>{selectedCharacters.length} items selected</p>
       <button className={styles.button} onClick={handleUnselectAll}>

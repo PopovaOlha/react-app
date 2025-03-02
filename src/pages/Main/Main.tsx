@@ -41,7 +41,7 @@ const Main: React.FC = () => {
         {selectedId && (
           <div className={styles.rightSection}>
             <Outlet />
-            <CharacterDetails searchTerm={searchTerm} page={page} />
+            <CharacterDetails />
           </div>
         )}
       </div>
