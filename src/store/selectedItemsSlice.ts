@@ -31,6 +31,9 @@ const selectedItemsSlice = createSlice({
     setCharacters: (state, action: PayloadAction<Character[]>) => {
       state.selectedCharacters = action.payload;
     },
+    selectMultipleCharacters: (state, action: PayloadAction<Character[]>) => {
+      state.selectedCharacters = action.payload;
+    },
   },
 });
 
@@ -39,5 +42,6 @@ export const {
   unselectCharacter,
   unselectAll,
   setCharacters,
+  selectMultipleCharacters,
 } = selectedItemsSlice.actions;
 export default selectedItemsSlice.reducer;

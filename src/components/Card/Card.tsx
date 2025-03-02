@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCharacter,
   unselectCharacter,
+  selectMultipleCharacters,
 } from '../../store/selectedItemsSlice';
 import { RootState } from '../../store/store';
 import { useSearchCharactersQuery } from '../../api/starWarsApi';
@@ -34,10 +35,12 @@ const Card: React.FC<CardProps> = ({ character }) => {
   });
 
   useEffect(() => {
-    const selected = JSON.parse(localStorage.getItem('selectedItems') || '[]');
-    selected.forEach((char: Character) => {
-      dispatch(selectCharacter(char));
-    });
+    const selected: Character[] = JSON.parse(
+      localStorage.getItem('selectedItems') || '[]'
+    );
+    if (selected.length > 0) {
+      dispatch(selectMultipleCharacters(selected));
+    }
   }, [dispatch]);
 
   useEffect(() => {
@@ -59,7 +62,7 @@ const Card: React.FC<CardProps> = ({ character }) => {
     if (event.target.checked) {
       dispatch(selectCharacter(character));
     } else {
-      dispatch(unselectCharacter(String(character.id)));
+      dispatch(unselectCharacter(character.id));
     }
   };
 
@@ -73,25 +76,25 @@ const Card: React.FC<CardProps> = ({ character }) => {
 
   return (
     <div
-      className={`${styles.card} ${isSelected ? styles.selected : ''} ${theme === 'dark' ? styles.dark : styles.light} `}
+      className={`${styles.card} ${isSelected ? styles.selected : ''} ${
+        theme === 'dark' ? styles.dark : styles.light
+      }`}
       data-testid="character-card"
       onClick={handleClick}
     >
-      <>
-        <input
-          type="checkbox"
-          className={styles.checkbox}
-          checked={isSelected}
-          onChange={handleCheckboxChange}
-        />
-        <img
-          className={styles.image}
-          src={character.image}
-          alt={character.name}
-        />
-        <h3 className={styles.name}>{character.name}</h3>
-        <p className={styles.description}>{character.birthYear}</p>
-      </>
+      <input
+        type="checkbox"
+        className={styles.checkbox}
+        checked={isSelected}
+        onChange={handleCheckboxChange}
+      />
+      <img
+        className={styles.image}
+        src={character.image}
+        alt={character.name}
+      />
+      <h3 className={styles.name}>{character.name}</h3>
+      <p className={styles.description}>{character.birthYear}</p>
     </div>
   );
 };
