@@ -10,10 +10,7 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Main />}>
-            <Route
-              path="details"
-              element={<CharacterDetails searchTerm="" page={1} />}
-            />
+            <Route path="details" element={<CharacterDetails />} />
           </Route>
           <Route path="/search" element={<Main />} />
           <Route path="*" element={<NotFound />} />

@@ -5,20 +5,20 @@ import ErrorComponent from '../../components/ErrorComponent/ErrorComponent';
 import styles from './CharacterDetails.module.css';
 import useTheme from '../../hooks/useTheme';
 
-const CharacterDetails: React.FC<{ searchTerm: string; page: number }> = ({
-  searchTerm,
-  page,
-}) => {
+const CharacterDetails: React.FC = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const [searchParams] = useSearchParams();
-  const id = searchParams.get('details') as string;
+
+  const id = searchParams.get('details');
+  const searchTerm = searchParams.get('query');
+  const page = searchParams.get('page');
 
   const {
     data: characterDetails,
     isLoading,
     error,
-  } = useGetCharacterDetailsQuery(id, {
+  } = useGetCharacterDetailsQuery(id ?? '', {
     skip: !id,
   });
 
@@ -27,16 +27,12 @@ const CharacterDetails: React.FC<{ searchTerm: string; page: number }> = ({
   }
 
   if (isLoading) return <Loader />;
-
-  if (error) {
+  if (error)
     return <ErrorComponent message="Failed to load character details." />;
-  }
-
-  if (!characterDetails) {
+  if (!characterDetails)
     return (
       <ErrorComponent message="No details available for this character." />
     );
-  }
 
   const closeDetails = () => {
     navigate(`/?query=${searchTerm}&page=${page}`);
@@ -56,13 +52,13 @@ const CharacterDetails: React.FC<{ searchTerm: string; page: number }> = ({
         <strong>Gender:</strong> {characterDetails.gender}
       </p>
       <p>
-        <strong>HairColor:</strong> {characterDetails.hairColor}
+        <strong>Hair Color:</strong> {characterDetails.hairColor}
       </p>
       <p>
         <strong>Height:</strong> {characterDetails.height}
       </p>
       <p>
-        <strong>HomeWorld:</strong> {characterDetails.homeworld}
+        <strong>Home World:</strong> {characterDetails.homeworld}
       </p>
     </div>
   );
