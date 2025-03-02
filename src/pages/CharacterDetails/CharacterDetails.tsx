@@ -12,7 +12,6 @@ const CharacterDetails: React.FC = () => {
   const [searchParams] = useSearchParams();
 
   const id = searchParams.get('details');
-  const searchTerm = searchParams.get('query');
   const page = searchParams.get('page');
 
   const {
@@ -36,7 +35,10 @@ const CharacterDetails: React.FC = () => {
     );
 
   const closeDetails = () => {
-    navigate(`/?query=${searchTerm}&page=${page}`);
+    navigate({
+      pathname: '/',
+      search: `?query=&page=${page}`,
+    });
   };
 
   return (

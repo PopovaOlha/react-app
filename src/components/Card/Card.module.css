@@ -33,11 +33,15 @@
   margin-top: 10px;
 }
 
-.description {
-  font-size: 12px;
+.description .div {
+  font-size: 5px;
   color: #bbb;
-  margin-top: 5px;
   text-align: center;
+  margin-top: -5px;
+}
+
+.description-light {
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .cardList {

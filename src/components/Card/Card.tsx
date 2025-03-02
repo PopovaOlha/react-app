@@ -27,6 +27,9 @@ const Card: React.FC<CardProps> = ({ character }) => {
     (state: RootState) => state.selectedItems.selectedCharacters
   );
 
+  const descriptionClass =
+    theme === DARK_THEME ? 'description' : 'description-light';
+
   const isLoading = useSelector((state: RootState) => state.ui.isLoading);
 
   const searchTerm = searchParams.get('query') || '';
@@ -102,7 +105,9 @@ const Card: React.FC<CardProps> = ({ character }) => {
         alt={character.name}
       />
       <h3 className={styles.name}>{character.name}</h3>
-      <p className={styles.description}>{character.birthYear}</p>
+      <div className={`${descriptionClass} ${styles.description} `}>
+        {character.birthYear}
+      </div>
     </div>
   );
 };
