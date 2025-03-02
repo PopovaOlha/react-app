@@ -37,7 +37,7 @@ describe('CharacterDetails', () => {
       <Provider store={store}>
         <MemoryRouter>
           <ThemeProvider>
-            <CharacterDetails searchTerm="Luke" page={1} />
+            <CharacterDetails />
           </ThemeProvider>
         </MemoryRouter>
       </Provider>
@@ -56,7 +56,7 @@ describe('CharacterDetails', () => {
       <Provider store={store}>
         <MemoryRouter>
           <ThemeProvider>
-            <CharacterDetails searchTerm="Luke" page={1} />
+            <CharacterDetails />
           </ThemeProvider>
         </MemoryRouter>
       </Provider>
@@ -68,7 +68,7 @@ describe('CharacterDetails', () => {
       <Provider store={store}>
         <MemoryRouter>
           <ThemeProvider>
-            <CharacterDetails searchTerm="Luke" page={1} />
+            <CharacterDetails />
           </ThemeProvider>
         </MemoryRouter>
       </Provider>
