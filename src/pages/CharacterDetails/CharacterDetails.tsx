@@ -10,7 +10,6 @@ const CharacterDetails: React.FC = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const [searchParams] = useSearchParams();
-
   const id = searchParams.get('details');
   const page = searchParams.get('page');
 
